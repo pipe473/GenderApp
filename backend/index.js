@@ -1,10 +1,20 @@
 import express from 'express';
-import dbConnect from './config/db.js'
+import dotenv from 'dotenv';
+import dbConnect from './config/db.js';
+
+import usuarioRoutes from './routes/usuarioRoutes.js';
 
 const app = express();
 
+dotenv.config();
+
 dbConnect();
 
-app.listen(4500, () => {
-    console.log("Servidor corriendo en el puerto 4500");    
+// Routing
+app.use('/api/usuarios', usuarioRoutes );
+
+const PORT = process.env.PORT || 4500;
+
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);    
 });
