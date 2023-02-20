@@ -91,6 +91,23 @@ const olvidePassword = async (req, res) => {
     } catch (error) {
         console.log(error);        
     }
+};
+
+const comprobarToken = async (req, res) => {
+    const { token } = req.params;
+
+    const tokenValido = await Usuario.findOne({ token });
+
+    if (tokenValido) {
+        res.json({ msg: 'Token válido y Usuario existe'});
+    } else {
+        const usuario = await Usuario.findOne({ token });
+        // console.log(usuario);
+        if (!usuario) {
+            const error = new Error("Token invalido");
+            return res.status(404).json({ msg: error.message });
+        }     
+    }
 }
 
-export { registrar, autenticar, confirmar, olvidePassword  };
+export { registrar, autenticar, confirmar, olvidePassword, comprobarToken  };
