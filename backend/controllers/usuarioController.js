@@ -108,6 +108,42 @@ const comprobarToken = async (req, res) => {
             return res.status(404).json({ msg: error.message });
         }     
     }
+};
+
+const nuevoPassword = async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    // console.log(token);
+    // console.log(password);   
+
+    const usuario = await Usuario.findOne({ token });
+
+    if (usuario) {
+       usuario.password = password;
+       usuario.token = "";
+       try {
+        await usuario.save();
+        res.json({ msg: 'Password modificado correctamente' });    
+       } catch (error) {
+           console.log(error);           
+       }
+    } else {
+        const usuario = await Usuario.findOne({ token });
+        // console.log(usuario);
+        if (!usuario) {
+            const error = new Error("Token invalido");
+            return res.status(404).json({ msg: error.message });
+        }     
+    }
+    
 }
 
-export { registrar, autenticar, confirmar, olvidePassword, comprobarToken  };
+export { 
+        registrar,
+        autenticar,
+        confirmar,
+        olvidePassword,
+        comprobarToken,
+        nuevoPassword
+};
