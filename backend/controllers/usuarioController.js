@@ -28,7 +28,7 @@ const autenticar = async (req, res) => {
     const { email, password } = req.body;
 
     // Comprobar si el usuario existe
-    const usuario = await Usuario.findOne({ email })
+    const usuario = await Usuario.findOne({ email });
     // console.log(usuario);
     if (!usuario) {
         const error = new Error("El usuario no existe");
@@ -71,9 +71,26 @@ const confirmar = async (req, res) => {
     } catch (error) {
         console.log(error);        
     }
+    console.log(usuarioConfirmar);    
+};
 
-    console.log(usuarioConfirmar);
-    
+const olvidePassword = async (req, res) => {
+    const { email } = req.body;
+    const usuario = await Usuario.findOne({ email });
+    // console.log(usuario);
+    if (!usuario) {
+        const error = new Error("El usuario no existe");
+        return res.status(404).json({ msg: error.message });
+    }
+
+    try {
+        usuario.token = generarId();
+        await usuario.save();
+        res.json({ msg: "Hemos enviado un email con las intrucciones" })
+        console.log(usuario);        
+    } catch (error) {
+        console.log(error);        
+    }
 }
 
-export { registrar, autenticar, confirmar  };
+export { registrar, autenticar, confirmar, olvidePassword  };
