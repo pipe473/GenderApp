@@ -1,6 +1,10 @@
 import Lista from '../models/Lista.js';
 
-const obtenerListas = async (req, res) => {};
+const obtenerListas = async (req, res) => {
+    const listas = await Lista.find().where('creador').equals(req.usuario);
+
+    res.json(listas);
+};
 
 const nuevaLista = async (req, res) => {
     // console.log(req.body);    
