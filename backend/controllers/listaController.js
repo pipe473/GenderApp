@@ -1,6 +1,22 @@
+import Lista from '../models/Lista.js';
+
 const obtenerListas = async (req, res) => {};
 
-const nuevaLista = async (req, res) => {};
+const nuevaLista = async (req, res) => {
+    // console.log(req.body);    
+    // console.log(req.usuario);
+    const lista = new Lista(req.body);
+
+    lista.creador = req.usuario._id;
+
+    try {
+        const listaAlmacenada = await lista.save();
+        res.json(listaAlmacenada);
+    } catch (error) {
+        console.log(error);        
+    }
+    
+};
 
 const obtenerLista = async (req, res) => {};
 

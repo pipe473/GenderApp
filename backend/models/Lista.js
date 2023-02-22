@@ -15,7 +15,7 @@ const listaSchema = mongoose.Schema({
         type: Date,
         default: Date.now(),
     },
-    invitado: {
+    invitada: {
         type:  String,
         trim: true,
         required: true
