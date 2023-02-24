@@ -4,6 +4,7 @@ import dbConnect from './config/db.js';
 
 import usuarioRoutes from './routes/usuarioRoutes.js';
 import listRoutes from './routes/listaRoutes.js';
+import regaloRoutes from './routes/regaloRoutes.js';
 
 const app = express();
 
@@ -16,6 +17,7 @@ dbConnect();
 // Routing
 app.use('/api/usuarios', usuarioRoutes );
 app.use('/api/listas', listRoutes );
+app.use('/api/regalos', regaloRoutes );
 
 const PORT = process.env.PORT || 4500;
 
