@@ -74,7 +74,28 @@ const actualizarRegalo = async (req, res) => {
 
 };
 
-const eliminarRegalo = async (req, res) => {};
+const eliminarRegalo = async (req, res) => {
+    const { id } = req.params;
+
+    const regalo = await Regalo.findById(id).populate("lista");
+
+    if (!regalo) {
+        const error = new Error("No se encuentra el regalo");
+        return res.status(404).json({ msg: error.message });
+    }
+
+    if (regalo.lista.creador.toString() !== req.usuario._id.toString()) {
+        const error = new Error("Acción no válida");
+        return res.status(403).json({ msg: error.message });
+    }
+
+    try {
+        await regalo.deleteOne();
+        res.json({ msg: "Regalo eliminado correctamente" })
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 const cambiarEstado = async (req, res) => {};
 
