@@ -14,7 +14,7 @@ const agregarRegalo = async (req, res) => {
 
     if (listaExiste.creador.toString() !== req.usuario._id.toString()) {
         const error = new Error("No tienes permisos para añadir regalos");
-        return res.status(404).json({ msg: error.message });
+        return res.status(403).json({ msg: error.message });
     }
 
     try {
@@ -27,7 +27,23 @@ const agregarRegalo = async (req, res) => {
 //     console.log(listaExiste);    
 };
 
-const obtenerRegalo = async (req, res) => {};
+const obtenerRegalo = async (req, res) => {
+    const { id } = req.params;
+
+    const regalo = await Regalo.findById(id).populate("lista");
+
+    if (!regalo) {
+        const error = new Error("No se encuentra el regalo");
+        return res.status(404).json({ msg: error.message });
+    }
+
+    if (regalo.lista.creador.toString() !== req.usuario._id.toString()) {
+        const error = new Error("Acción no válida");
+        return res.status(403).json({ msg: error.message });
+    }
+    res.json(regalo);
+
+};
 
 const actualizarRegalo = async (req, res) => {};
 
