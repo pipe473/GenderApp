@@ -67,7 +67,28 @@ const editarLista = async (req, res) => {
     }
 };
 
-const eliminarLista = async (req, res) => {};
+const eliminarLista = async (req, res) => {
+    const { id } = req.params;
+
+    const lista = await Lista.findById(id);
+
+    if (!lista) {
+       const error = new Error("Lista no encontrada");
+       return res.status(404).json({ msg: error.message });  
+    }   
+
+    if (lista.creador.toString() !== req.usuario._id.toString() ) {
+        const error = new Error("Acción no válida, no tienes los permisos para acceder a esta lista");
+        return res.status(401).json({ msg: error.message });  
+    }  
+
+    try {
+        await lista.deleteOne();
+        res.json({ msg: "Lista eliminada correctamente" });
+    } catch (error) {
+        console.log(error);        
+    }
+};
 
 const agregarInvitado = async (req, res) => {};
 
