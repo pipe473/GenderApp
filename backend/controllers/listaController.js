@@ -1,4 +1,5 @@
 import Lista from '../models/Lista.js';
+import Regalo from '../models/Regalo.js';
 
 const obtenerListas = async (req, res) => {
     const listas = await Lista.find().where('creador').equals(req.usuario);
@@ -36,7 +37,14 @@ const obtenerLista = async (req, res) => {
         return res.status(401).json({ msg: error.message });  
     }  
 
-    res.json(lista);
+     // Obtener los regalos de la lista
+     const regalos = await Regalo.find().where("lista").equals(lista._id);
+    // console.log(regalo);    
+
+    res.json({
+        lista,
+        regalos,
+    });
 };
 
 const editarLista = async (req, res) => {
@@ -94,7 +102,6 @@ const agregarInvitado = async (req, res) => {};
 
 const eliminarInvitado = async (req, res) => {};
 
-const obtenerListaProductos = async (req, res) => {};
 
 export {
     obtenerListas,
@@ -103,6 +110,5 @@ export {
     editarLista,
     eliminarLista,
     agregarInvitado,
-    eliminarInvitado,
-    obtenerListaProductos
+    eliminarInvitado
 }

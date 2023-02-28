@@ -27,7 +27,7 @@ const regaloSchema = mongoose.Schema({
     },
     lista: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'Lista',
+        ref: 'Lista',
     }
 },
 {

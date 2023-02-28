@@ -41,6 +41,7 @@ const obtenerRegalo = async (req, res) => {
         const error = new Error("Acción no válida");
         return res.status(403).json({ msg: error.message });
     }
+
     res.json(regalo);
 
 };

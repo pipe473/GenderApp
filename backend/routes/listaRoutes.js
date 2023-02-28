@@ -7,16 +7,11 @@ import {
     editarLista,
     eliminarLista,
     agregarInvitado,
-    eliminarInvitado,
-    obtenerListaProductos
+    eliminarInvitado
  } from '../controllers/listaController.js';
  import checkAuth from '../middleware/checkAuth.js';
 
  const router = express.Router();
-
-
-//  router.get('/', checkAuth, obtenerListas );
-//  router.post('/', checkAuth, nuevaLista );
 
  router
     .route("/")
@@ -30,7 +25,7 @@ router
     .put(checkAuth, editarLista)
     .delete( checkAuth, eliminarLista );
 
-    router.get('/listas/:id', checkAuth, obtenerListaProductos);
+    // router.get("/listas/:id", checkAuth, obtenerListaProductos);
     router.post('/agregar-colaborador/:id', checkAuth, agregarInvitado);
     router.delete('/eliminar-colaborador/:id', checkAuth, eliminarInvitado);
 
