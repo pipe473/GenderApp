@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import Alerta from '../components/Alerta';
 
 const Registrar = () => {
 
@@ -7,6 +8,21 @@ const [ nombre, setNombre ] = useState('');
 const [ email, setEmail] = useState('');
 const [ contraseña, setContraseña ] = useState('');
 const [ repetirContraseña, setRepetirContraseña ] = useState('');
+const [ alerta, setAlerta ] = useState({});
+
+const handleSubmit = e => {
+    e.preventDefault();
+
+    if ([nombre, email, contraseña, repetirContraseña].includes('')) {
+        setAlerta({
+            msg: 'Todos los campos son obligatorios',
+            error: true
+        })
+        return
+    }
+}
+
+const { msg } = alerta;
 
   return (
     <>
@@ -14,7 +30,12 @@ const [ repetirContraseña, setRepetirContraseña ] = useState('');
         Crea tu cuenta y administra la lista de tu {""}
         <span className="text-teal-700"> bebé</span>
       </h1>
-      <form className="my-10 bg-white shadow rounded-lg p-10">
+
+    { msg && <Alerta alerta={alerta} /> }
+
+      <form className="my-10 bg-white shadow rounded-lg p-10"
+        onSubmit={handleSubmit}
+      >
         <div className="my-5">
           <label
             className="uppercase text-teal-700 block text-xl font-bold"
@@ -94,7 +115,7 @@ const [ repetirContraseña, setRepetirContraseña ] = useState('');
         </Link>
         <Link
           className="block text-center my-5 text-slate-500 uppercase text-sm"
-          to="recuperar-password"
+          to="/recuperar-password"
         >
           Olvidé Mi Password
         </Link>
