@@ -1,6 +1,13 @@
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 
 const Registrar = () => {
+
+const [ nombre, setNombre ] = useState('');
+const [ email, setEmail] = useState('');
+const [ contraseña, setContraseña ] = useState('');
+const [ repetirContraseña, setRepetirContraseña ] = useState('');
+
   return (
     <>
       <h1 className="text-teal-500 font-black text-4xl capitalize">
@@ -20,6 +27,8 @@ const Registrar = () => {
             type="nombre"
             placeholder="Tu Nombre"
             className="w-full mt-3 p-3 border rounded-xl bg-teal-50"
+            value={ nombre }
+            onChange= {e => setNombre(e.target.value) }
           />
         </div>
         <div className="my-5">
@@ -34,6 +43,8 @@ const Registrar = () => {
             type="email"
             placeholder="Email de Registro"
             className="w-full mt-3 p-3 border rounded-xl bg-teal-50"
+            value={ email }
+            onChange= {e => setEmail(e.target.value) }
           />
         </div>
         <div className="my-5">
@@ -48,6 +59,8 @@ const Registrar = () => {
             type="password"
             placeholder="Contraseña de Registro"
             className="w-full mt-3 p-3 border rounded-xl bg-teal-50"
+            value={ contraseña }
+            onChange= {e => setContraseña(e.target.value) }
           />
         </div>
         <div className="my-5">
@@ -62,6 +75,8 @@ const Registrar = () => {
             type="password"
             placeholder="Repetir tu Contraseña"
             className="w-full mt-3 p-3 border rounded-xl bg-teal-50"
+            value={ repetirContraseña }
+            onChange= {e => setRepetirContraseña(e.target.value) }
           />
         </div>
         <input
