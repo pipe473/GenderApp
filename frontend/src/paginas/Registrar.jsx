@@ -20,6 +20,26 @@ const handleSubmit = e => {
         })
         return
     }
+    if ( contraseña !== repetirContraseña ) {
+        setAlerta({
+            msg: 'Las contraseñas no coinciden, tienen que ser iguales',
+            error: true
+        })
+        return
+    }
+    if ( contraseña.length < 8 ) {
+        setAlerta({
+            msg: 'Las contraseñas debe tener mínimo 8 caracteres',
+            error: true
+        })
+        return
+    }
+
+    setAlerta({})
+
+    // Crear el usuario en la API
+    console.log('Creando...');
+    
 }
 
 const { msg } = alerta;
