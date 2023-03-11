@@ -1,33 +1,35 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import Alerta from '../components/Alerta';
+import axios from 'axios';
 
 const Registrar = () => {
 
 const [ nombre, setNombre ] = useState('');
 const [ email, setEmail] = useState('');
-const [ contraseña, setContraseña ] = useState('');
+const [ password, setContraseña ] = useState('');
 const [ repetirContraseña, setRepetirContraseña ] = useState('');
 const [ alerta, setAlerta ] = useState({});
 
-const handleSubmit = e => {
+
+const handleSubmit = async e => {
     e.preventDefault();
 
-    if ([nombre, email, contraseña, repetirContraseña].includes('')) {
+    if ([nombre, email, password, repetirContraseña].includes('')) {
         setAlerta({
             msg: 'Todos los campos son obligatorios',
             error: true
         })
         return
     }
-    if ( contraseña !== repetirContraseña ) {
+    if ( password !== repetirContraseña ) {
         setAlerta({
             msg: 'Las contraseñas no coinciden, tienen que ser iguales',
             error: true
         })
         return
     }
-    if ( contraseña.length < 8 ) {
+    if ( password.length < 8 ) {
         setAlerta({
             msg: 'Las contraseñas debe tener mínimo 8 caracteres',
             error: true
@@ -38,7 +40,21 @@ const handleSubmit = e => {
     setAlerta({})
 
     // Crear el usuario en la API
-    console.log('Creando...');
+    try {
+        const { data } = await axios.post('http://localhost:4500/api/usuarios', {
+            nombre, email, password
+        } )
+        setAlerta({ 
+            msg: data.msg,
+            error: false
+        })
+        
+    } catch (error) {
+       setAlerta({
+           msg: error.response.data.msg,
+           error: true
+       }) 
+    }
     
 }
 
@@ -100,7 +116,7 @@ const { msg } = alerta;
             type="password"
             placeholder="Contraseña de Registro"
             className="w-full mt-3 p-3 border rounded-xl bg-teal-50"
-            value={ contraseña }
+            value={ password }
             onChange= {e => setContraseña(e.target.value) }
           />
         </div>
