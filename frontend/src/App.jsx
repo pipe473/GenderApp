@@ -3,11 +3,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 import AuthLayout from './layouts/AuthLayout';
-import Login from './paginas/Login';
-import Registrar from './paginas/Registrar';
-import RecuperarPassword from './paginas/RecuperarPassword';
-import NuevoPassword from './paginas/NuevoPassword';
-import ConfirmarCuenta from './paginas/ConfirmarCuenta';
+import Login from './pages/Login';
+import Registrar from './pages/Registrar';
+import RecuperarPassword from './pages/RecuperarPassword';
+import NuevoPassword from './pages/NuevoPassword';
+import ConfirmarCuenta from './pages/ConfirmarCuenta';
+
+// console.log(import.meta.VITE_BACKEND_URL);
 
 function App() {
 
