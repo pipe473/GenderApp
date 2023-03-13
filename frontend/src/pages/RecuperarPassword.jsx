@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import Alerta from '../components/Alerta';
+import clienteAxios from '../config/clienteAxios';
 
 const RecuperarPassword = () => {
 
@@ -16,6 +17,20 @@ const RecuperarPassword = () => {
         error: true
       });
       return
+    }
+    try {
+      const { data } = await clienteAxios.post(`/usuarios/olvide-password`, { email } )
+        setAlerta({ 
+            msg: data.msg,
+            error: false
+        })
+        // console.log(data);
+        
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true
+      }) 
     }
   }
 

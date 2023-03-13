@@ -30,5 +30,36 @@ export const emailRegistro = async (datos) => {
       `,
   });
 };
+
+export const emailOlvidePAssword = async (datos) => {
+    const { email, nombre, token } = datos;
+ 
+    const transport = nodemailer.createTransport({
+     host: "sandbox.smtp.mailtrap.io",
+     port: 2525,
+     auth: {
+       user: "7f3a658714e000",
+       pass: "12b9ecc2f95306"
+     },
+   });
+ 
+   // Informacion del email
+ 
+   const info = await transport.sendMail({
+       from: '"Babyshower - Admin lista de regalos" <cuentas@babyshower.com>',
+       to: email,
+       subject: "Babyshower - Reestablece tu contraseña",
+       text: "Por favor comprueba que esté todo correcto",
+       html: `<p>Hola: ${nombre} has solicitado reestablcer contraseña</p>
+       <p>Sigue el siguiente enlace para generar una nueva contraseña</p>
+       
+       <a href="${process.env.FRONTEND_URL}/recuperar-password/${token}">Reestablecer contraseña</a>
+ 
+ 
+       <p>Si no has solicitado este email, puedes ignorar el mensaje</p>
+       
+       `,
+   });
+ };
  
 export default emailRegistro;
