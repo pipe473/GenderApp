@@ -1,13 +1,36 @@
+import { useState } from 'react';
 import { Link } from "react-router-dom";
+import Alerta from '../components/Alerta';
 
 const RecuperarPassword = () => {
+
+  const [email, setEmail] = useState('')
+  const [alerta, setAlerta] = useState({})
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+
+    if (email === '' || email.length < 6) {
+      setAlerta({
+        msg: 'El email es obligatorio',
+        error: true
+      });
+      return
+    }
+  }
+
+  const { msg } = alerta
+
   return (
     <>
       <h1 className="text-teal-500 font-black text-4xl capitalize">
         Recupera tu acceso y sigue{" "}
         <span className="text-teal-700">con tu lista</span>
       </h1>
-      <form className="my-10 bg-white shadow rounded-lg p-10">
+      { msg && <Alerta alerta={alerta} />}
+      <form className="my-10 bg-white shadow rounded-lg p-10"
+        onSubmit={handleSubmit}
+      >
         <div className="my-5">
           <label
             className="uppercase text-teal-700 block text-xl font-bold"
@@ -20,6 +43,8 @@ const RecuperarPassword = () => {
             type="email"
             placeholder="Email de Registro"
             className="w-full mt-3 p-3 border rounded-xl bg-teal-50"
+            value={email}
+            onChange={ e => setEmail(e.target.value) }
           />
         </div>
         <input

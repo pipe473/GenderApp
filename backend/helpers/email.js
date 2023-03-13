@@ -1,7 +1,34 @@
 import nodemailer from 'nodemailer';
 
-export const emailRegistro = (datos) => {
-    console.log("Datos", datos);    
-}
+export const emailRegistro = async (datos) => {
+   const { email, nombre, token } = datos;
+
+   const transport = nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "7f3a658714e000",
+      pass: "12b9ecc2f95306"
+    },
+  });
+
+  // Informacion del email
+
+  const info = await transport.sendMail({
+      from: '"Babyshower - Admin lista de regalos" <cuentas@babyshower.com>',
+      to: email,
+      subject: "Babyshower - Te esperamos!! Confirma tu asistencia",
+      text: "Por favor comprueba que esté todo correcto",
+      html: `<p>Hola: ${nombre} Confirma tu asistencia al babyshower de POL</p>
+      <p>Tu cuenta está casi lista, solo debes confirmar en el siguiente enlace:</p>
+      
+      <a href="${process.env.FRONTEND_URL}/confirmar/${token}">Confirmar</a>
+
+
+      <p>Si no has creado esta cuenta, puedes ignorar el mensaje</p>
+      
+      `,
+  });
+};
  
 export default emailRegistro;
