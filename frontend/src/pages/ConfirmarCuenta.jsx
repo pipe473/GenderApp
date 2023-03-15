@@ -10,20 +10,21 @@ const ConfirmarCuenta = () => {
   const [cuentaConfirmada, setCuentaConfirmada] = useState(false);
 
   const params = useParams();
-
   const { id } = params
 
   useEffect(() =>{
-    const accountConfirm = async () => {
+    const confirmarCuenta = async () => {
       try {
         const url = `/usuarios/confirmar/${id}`
-        const { data } = await clienteAxios(url)
+        const { data } = await clienteAxios(url);
+
+        console.log(data);
+        
 
         setAlerta({
           msg: data.msg,
           error: false
-        })
-
+        })       
         setCuentaConfirmada(true);
         
       } catch (error) {
@@ -33,7 +34,7 @@ const ConfirmarCuenta = () => {
         })      
       }
     }
-    accountConfirm();
+    confirmarCuenta();
   }, [])
 
   const { msg } = alerta
