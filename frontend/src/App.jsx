@@ -3,13 +3,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 import AuthLayout from './layouts/AuthLayout';
+import RutaProtegida from './layouts/RutaProtegida';
+
 import Login from './pages/Login';
 import Registrar from './pages/Registrar';
 import RecuperarPassword from './pages/RecuperarPassword';
 import NuevoPassword from './pages/NuevoPassword';
 import ConfirmarCuenta from './pages/ConfirmarCuenta';
+import Listas from './pages/Listas';
 
-import {AuthProvider} from './context/AuthProvider'
+import { AuthProvider } from './context/AuthProvider'
 
 function App() {
 
@@ -27,7 +30,8 @@ function App() {
             <Route path="confirmar/:id" element={<ConfirmarCuenta />} />           
           </Route>
           {/* Area Privada */}
-          <Route path="/">            
+          <Route path="/listas" element={<RutaProtegida />}>  
+            <Route index element={<Listas />} />
           </Route>
         </Routes>
       </AuthProvider>
