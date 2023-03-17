@@ -18,9 +18,6 @@ const ConfirmarCuenta = () => {
         const url = `/usuarios/confirmar/${id}`
         const { data } = await clienteAxios(url);
 
-        console.log(data);
-        
-
         setAlerta({
           msg: data.msg,
           error: false
