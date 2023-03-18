@@ -11,6 +11,7 @@ import RecuperarPassword from './pages/RecuperarPassword';
 import NuevoPassword from './pages/NuevoPassword';
 import ConfirmarCuenta from './pages/ConfirmarCuenta';
 import Listas from './pages/Listas';
+import NuevaLista from './pages/NuevaLista';
 
 import { AuthProvider } from './context/AuthProvider'
 
@@ -32,6 +33,7 @@ function App() {
           {/* Area Privada */}
           <Route path="/listas" element={<RutaProtegida />}>  
             <Route index element={<Listas />} />
+            <Route path="crear-lista" element={<NuevaLista />} />
           </Route>
         </Routes>
       </AuthProvider>
