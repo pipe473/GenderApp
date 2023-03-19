@@ -11,7 +11,7 @@ const FormularioLista = () => {
 
     const { mostrarAlerta, alerta, submitLista } = useListas();
 
-    const handleClick = e => {
+    const handleClick = async e => {
         e.preventDefault();
 
         if ([nombre, descripcion, fechaEvento, invitada].includes('')) {
@@ -24,7 +24,12 @@ const FormularioLista = () => {
         }
 
         // Pasar los datos hacia el provider
-        submitLista({ nombre, descripcion, fechaEvento, invitada })
+        await submitLista({ nombre, descripcion, fechaEvento, invitada })
+        
+        setNombre('')
+        setDescripcion('')
+        setFechaEvento('')
+        setInvitada('')
     }
 
     const { msg } = alerta
