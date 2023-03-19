@@ -13,29 +13,32 @@ import ConfirmarCuenta from './pages/ConfirmarCuenta';
 import Listas from './pages/Listas';
 import NuevaLista from './pages/NuevaLista';
 
-import { AuthProvider } from './context/AuthProvider'
+import { AuthProvider } from './context/AuthProvider';
+import { ListasProvider } from './context/ListasProvider';
 
 function App() {
 
   return (
     <div className="App">
       <BrowserRouter>
-      <AuthProvider>        
-        <Routes>
-          {/* Area Pública */}
-          <Route path="/" element={<AuthLayout />}>
-            <Route index element={<Login />} />
-            <Route path="registrar" element={<Registrar />} />
-            <Route path="recuperar-password" element={<RecuperarPassword />} />
-            <Route path="recuperar-password/:token" element={<NuevoPassword />} />
-            <Route path="confirmar/:id" element={<ConfirmarCuenta />} />           
-          </Route>
-          {/* Area Privada */}
-          <Route path="/listas" element={<RutaProtegida />}>  
-            <Route index element={<Listas />} />
-            <Route path="crear-lista" element={<NuevaLista />} />
-          </Route>
-        </Routes>
+      <AuthProvider>   
+        <ListasProvider>       
+          <Routes>
+            {/* Area Pública */}
+            <Route path="/" element={<AuthLayout />}>
+              <Route index element={<Login />} />
+              <Route path="registrar" element={<Registrar />} />
+              <Route path="recuperar-password" element={<RecuperarPassword />} />
+              <Route path="recuperar-password/:token" element={<NuevoPassword />} />
+              <Route path="confirmar/:id" element={<ConfirmarCuenta />} />           
+            </Route>
+            {/* Area Privada */}
+            <Route path="/listas" element={<RutaProtegida />}>  
+              <Route index element={<Listas />} />
+              <Route path="crear-lista" element={<NuevaLista />} />
+            </Route>
+          </Routes>
+        </ListasProvider>  
       </AuthProvider>
       </BrowserRouter>
     </div>
