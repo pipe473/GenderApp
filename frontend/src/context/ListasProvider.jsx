@@ -5,10 +5,12 @@ const ListasContext = createContext();
 
 const ListasProvider = ({ children }) => {
 
+    const [listas, setListas] = useState([]);
+
     return (
         <ListasContext.Provider
             value={{
-
+                listas
             }}
         >{children}
 
