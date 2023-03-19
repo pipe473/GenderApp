@@ -14,12 +14,12 @@ const Header = () => {
                 <div className="flex items-center gap-4">
                     <Link
                         to="/listas"
-                        className="font-bold uppercase"
+                        className=" uppercase text-teal-100"
                     >Listas</Link>
 
                     <button
                         type="button"
-                        className="text-teal-50 text-sm bg-teal-800 bg-teal-100 hover:text-teal-800 hover:bg-teal-100 trasition-colors p-3 rounded-lg uppercase font-bold"
+                        className="text-teal-50 text-sm bg-teal-800 bg-teal-100 hover:text-teal-800 hover:bg-teal-100 transition-colors p-3 rounded-lg uppercase"
                     >Cerrar Sesión</button>
                 </div>
             </div>
