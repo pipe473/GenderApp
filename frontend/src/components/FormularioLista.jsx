@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import useListas from '../hooks/useListas';
+import Alerta from './Alerta';
 
 const FormularioLista = () => {
 
@@ -7,10 +9,32 @@ const FormularioLista = () => {
     const [fechaEvento, setFechaEvento] = useState('');
     const [invitada, setInvitada] = useState('');
 
+    const { mostrarAlerta, alerta, submitLista } = useListas();
+
+    const handleClick = e => {
+        e.preventDefault();
+
+        if ([nombre, descripcion, fechaEvento, invitada].includes('')) {
+            mostrarAlerta({
+                msg: 'Todos los campos son obligatorios',
+                error: true
+            })
+
+            return
+        }
+
+        // Pasar los datos hacia el provider
+        submitLista({ nombre, descripcion, fechaEvento, invitada })
+    }
+
+    const { msg } = alerta
+
     return ( 
             <form
                 className="bg-white py-10 px-5 md:1/2 rounded-lg shadow"
+                onSubmit={handleClick}
             >
+                {msg && <Alerta alerta={alerta} />}
                 <div className="mb-5">
                     <label
                         className="text-gray-700 uppercase font-bold text-sm"
