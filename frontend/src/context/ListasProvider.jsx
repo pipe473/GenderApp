@@ -9,7 +9,30 @@ const ListasProvider = ({ children }) => {
     const [listas, setListas] = useState([]);
     const [alerta, setAlerta] = useState([]);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const obtenerListas = async () => {
+            try {
+                const token = localStorage.getItem('token')
+                if (!token) return
+    
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+
+                const { data } = await clienteAxios('/listas', config)
+                setListas(data);              
+
+            } catch (error) {
+                console.log(error);                
+            }
+        }
+        obtenerListas()
+    }, [])
 
     const mostrarAlerta = alerta => {
         setAlerta(alerta)
