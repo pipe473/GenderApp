@@ -37,14 +37,11 @@ const obtenerLista = async (req, res) => {
         return res.status(401).json({ msg: error.message });  
     }  
 
-     // Obtener los regalos de la lista
-     const regalos = await Regalo.find().where("lista").equals(lista._id);
-    // console.log(regalo);    
+    //  Obtener los regalos de la lista
+    //  const regalos = await Regalo.find().where("lista").equals(lista._id);
+    //  console.log(regalo);    
 
-    res.json({
-        lista,
-        regalos,
-    });
+    res.json(lista);
 };
 
 const editarLista = async (req, res) => {

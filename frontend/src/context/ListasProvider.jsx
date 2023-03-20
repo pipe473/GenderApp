@@ -73,13 +73,32 @@ const ListasProvider = ({ children }) => {
         }      
     }
 
+    const obtenerLista = async id => {
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const { data } = await clienteAxios(`/listas/${id}`, config)
+            console.log(data);            
+        } catch (error) {
+            console.log(error);            
+        }     
+    }
+
     return (
         <ListasContext.Provider
             value={{
                 listas,
                 mostrarAlerta,
                 alerta,
-                submitLista
+                submitLista,
+                obtenerLista
             }}
         >{children}
 
