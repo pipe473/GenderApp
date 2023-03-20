@@ -4,7 +4,7 @@ import PreviewLista from '../components/PreviewLista';
 const Listas = () => {
 
     const { listas } = useListas();    
-    console.log(listas);    
+    // console.log(listas);    
 
     return ( 
             <>

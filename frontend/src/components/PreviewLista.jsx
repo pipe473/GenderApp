@@ -4,9 +4,9 @@ const PreviewLista = ({lista}) => {
     const { nombre, _id, invitada } = lista
     return ( 
         <div className="border-b p-5 flex">
-            <p className="flex-1">
+            <p className="flex-1 text-teal-800">
                 {nombre}
-                <span className="text-sm text-teal-500 uppercase">{''} {invitada}</span>
+                <span className="text-sm text-teal-500 uppercase">{''} <span className="text-teal-800">-</span> {invitada}</span>
             </p>
             <Link
                 to={`${_id}`}

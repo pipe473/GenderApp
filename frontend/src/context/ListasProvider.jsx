@@ -56,7 +56,8 @@ const ListasProvider = ({ children }) => {
             }
 
             const { data } = await clienteAxios.post('/listas', lista, config)
-            console.log(data);
+            // console.log(data);
+            setListas([...listas, data]);
             
             setAlerta({
                 msg: 'Lista creada correctamente',
