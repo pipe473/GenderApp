@@ -7,7 +7,9 @@ const ListasContext = createContext();
 const ListasProvider = ({ children }) => {
 
     const [listas, setListas] = useState([]);
-    const [alerta, setAlerta] = useState([]);
+    const [alerta, setAlerta] = useState({});
+    const [lista, setLista] = useState({});
+    const [cargando, setCargando] = useState(false);
 
     const navigate = useNavigate();
 
@@ -74,6 +76,7 @@ const ListasProvider = ({ children }) => {
     }
 
     const obtenerLista = async id => {
+        setCargando(true);
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -85,9 +88,12 @@ const ListasProvider = ({ children }) => {
                 }
             }
             const { data } = await clienteAxios(`/listas/${id}`, config)
-            console.log(data);            
+            // console.log(data);   
+            setLista(data);         
         } catch (error) {
             console.log(error);            
+        } finally {
+            setCargando(false);
         }     
     }
 
@@ -98,7 +104,9 @@ const ListasProvider = ({ children }) => {
                 mostrarAlerta,
                 alerta,
                 submitLista,
-                obtenerLista
+                obtenerLista,
+                lista,
+                cargando
             }}
         >{children}
 

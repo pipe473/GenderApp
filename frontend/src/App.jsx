@@ -13,6 +13,7 @@ import ConfirmarCuenta from './pages/ConfirmarCuenta';
 import Listas from './pages/Listas';
 import NuevaLista from './pages/NuevaLista';
 import Lista from './pages/Lista';
+import EditarLista from './pages/EditarLista';
 
 import { AuthProvider } from './context/AuthProvider';
 import { ListasProvider } from './context/ListasProvider';
@@ -38,6 +39,7 @@ function App() {
               <Route index element={<Listas />} />
               <Route path="crear-lista" element={<NuevaLista />} />
               <Route path=":id" element={<Lista />} />
+              <Route path="editar/:id" element={<EditarLista />} />
             </Route>
           </Routes>
         </ListasProvider>  
