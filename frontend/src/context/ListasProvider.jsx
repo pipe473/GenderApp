@@ -45,7 +45,36 @@ const ListasProvider = ({ children }) => {
     }
 
     const submitLista = async lista => {
-        // console.log(lista);  
+       if (lista.id) {
+           editarLista(lista)
+       } else {
+           nuevarLista(lista)
+       }    
+    }
+
+    const editarLista = async lista =>{
+       try {
+        const token = localStorage.getItem('token')
+        if (!token) return
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        const { data } = clienteAxios.put(`/listas/${lista.id}`, lista, config )
+        console.log(data);
+        
+
+       } catch (error) {
+           console.log(error);           
+       }     
+    }
+
+    const nuevarLista = async lista =>{
+       
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -72,7 +101,7 @@ const ListasProvider = ({ children }) => {
             }, 3000);
         } catch (error) {
             console.log(error);            
-        }      
+        }        
     }
 
     const obtenerLista = async id => {

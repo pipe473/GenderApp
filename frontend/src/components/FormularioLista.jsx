@@ -41,8 +41,9 @@ const FormularioLista = () => {
         }
 
         // Pasar los datos hacia el provider
-        await submitLista({ nombre, descripcion, fechaEvento, invitada })
+        await submitLista({ id, nombre, descripcion, fechaEvento, invitada })
         
+        setId(null)
         setNombre('')
         setDescripcion('')
         setFechaEvento('')
