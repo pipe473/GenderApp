@@ -1,15 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import useListas from '../hooks/useListas';
 import Alerta from './Alerta';
 
 const FormularioLista = () => {
 
+    const [id, setId] = useState(null);
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [fechaEvento, setFechaEvento] = useState('');
     const [invitada, setInvitada] = useState('');
 
-    const { mostrarAlerta, alerta, submitLista } = useListas();
+    const params = useParams();
+    
+    const { mostrarAlerta, alerta, submitLista, lista } = useListas();    
+
+  useEffect(() => {
+   if ( params.id ) {
+       setId(lista._id)
+       setNombre(lista.nombre)
+       setDescripcion(lista.descripcion)
+       setFechaEvento(lista.fechaEvento?.split('T')[0])
+       setInvitada(lista.invitada)
+    //    console.log(lista.fechaEvento);
+       
+   }
+  }, [params]) 
+
 
     const handleClick = async e => {
         e.preventDefault();
@@ -96,7 +113,7 @@ const FormularioLista = () => {
                 </div>
                 <input
                     type="submit"
-                    value="Crear Lista"
+                    value={ id ? 'Actualizar Lista' : 'Crear Lista' }
                     className="w-full text-teal-50 text-sm bg-teal-800 hover:text-teal-800 hover:bg-teal-100 p-3 rounded-md uppercase text-center rounded-lg cursor-pointer transition-colors"
                 />
             </form>
