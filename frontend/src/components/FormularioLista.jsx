@@ -114,7 +114,7 @@ const FormularioLista = () => {
                 </div>
                 <input
                     type="submit"
-                    value={ id ? 'Actualizar Lista' : 'Crear Lista' }
+                    value={ id ? 'Actualizar Lista': 'Crear Lista'}
                     className="w-full text-teal-50 text-sm bg-teal-800 hover:text-teal-800 hover:bg-teal-100 p-3 rounded-md uppercase text-center rounded-lg cursor-pointer transition-colors"
                 />
             </form>

@@ -46,9 +46,9 @@ const ListasProvider = ({ children }) => {
 
     const submitLista = async lista => {
        if (lista.id) {
-           editarLista(lista)
+            await editarLista(lista)
        } else {
-           nuevarLista(lista)
+            await nuevarLista(lista)
        }    
     }
 
@@ -64,13 +64,26 @@ const ListasProvider = ({ children }) => {
             }
         }
 
-        const { data } = clienteAxios.put(`/listas/${lista.id}`, lista, config )
-        console.log(data);
+        const { data } = await clienteAxios.put(`/listas/${lista.id}`, lista, config)
+        // console.log(data);
         
+        
+        // Sincronizar el state
+        const listasActualizadas = listas.map(listaState => listaState._id === data._id ? data : listaState )
+        setListas(listasActualizadas)
+        
+        setAlerta({
+            msg: 'Lista Actualizada correctamente',
+            error: false
+        })
 
-       } catch (error) {
-           console.log(error);           
-       }     
+        setTimeout(() => {
+            setAlerta({})
+            navigate('/listas')
+        }, 3000);
+        } catch (error) {
+            console.log(error);            
+        }    
     }
 
     const nuevarLista = async lista =>{
