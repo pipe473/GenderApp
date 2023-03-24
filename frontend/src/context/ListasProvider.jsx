@@ -86,8 +86,7 @@ const ListasProvider = ({ children }) => {
         }    
     }
 
-    const nuevarLista = async lista =>{
-       
+    const nuevarLista = async lista => {       
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -98,7 +97,6 @@ const ListasProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-
             const { data } = await clienteAxios.post('/listas', lista, config)
             // console.log(data);
             setListas([...listas, data]);
@@ -139,6 +137,10 @@ const ListasProvider = ({ children }) => {
         }     
     }
 
+    const eliminarLista = async id => {
+        console.log('Eliminando', id);        
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -148,7 +150,8 @@ const ListasProvider = ({ children }) => {
                 submitLista,
                 obtenerLista,
                 lista,
-                cargando
+                cargando,
+                eliminarLista
             }}
         >{children}
 
