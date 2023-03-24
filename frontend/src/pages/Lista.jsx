@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useListas from '../hooks/useListas';
 import ModalFormularioLista from '../components/ModalFormularioLista';
@@ -8,6 +8,8 @@ const Lista = () => {
     const params = useParams();
     // console.log(params);  
     const { obtenerLista, lista, cargando } = useListas();
+
+    const [modal, setModal] = useState(false)
 
     useEffect(() => {
         obtenerLista(params.id)
@@ -32,6 +34,7 @@ const Lista = () => {
                 </div>
             </div>
                 <button
+                        onClick={() => setModal(true)}
                         type="button"
                         className="text-sm px-5 py-3 w-full md:w-auto rounded-lg uppercase bg-teal-400 text-white text-center mt-5 flex gap-2 items-center justify-center"
                     >
@@ -40,7 +43,10 @@ const Lista = () => {
                     </svg>                    
                     Nueva Lista
                 </button>
-            <ModalFormularioLista />
+            <ModalFormularioLista 
+                modal={modal}
+                setModal={setModal}
+            />
         </>        
      );
 }
