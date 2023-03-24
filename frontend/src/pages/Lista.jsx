@@ -14,8 +14,10 @@ const Lista = () => {
 
    const { nombre } = lista 
 
+   if (cargando) return 'Cargando...'
+
     return ( 
-        cargando ? 'cargando...' : (
+        <>
             <div className="flex justify-between">
                 <h1 className="font-black text-4xl">{nombre}</h1>
                 <div className="flex items-center gap-2 text-teal-500 hover:text-teal-800">
@@ -28,7 +30,15 @@ const Lista = () => {
                     >Editar</Link>
                 </div>
             </div>
-        )
+                <button
+                    type="button"
+                    className="text-sm px-5 py-3 w-full md:w-auto rounded-lg uppercase bg-teal-400 text-white text-center mt-5 flex gap-2 items-center justify-center"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>                    
+                    Nueva Lista</button>
+        </>        
      );
 }
  
