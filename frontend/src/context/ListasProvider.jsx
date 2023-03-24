@@ -138,7 +138,36 @@ const ListasProvider = ({ children }) => {
     }
 
     const eliminarLista = async id => {
-        console.log('Eliminando', id);        
+       try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        
+        const { data } = await clienteAxios.delete(`/listas/${id}`, config)
+
+        // Sincronizar el state
+        const actualizarLista = listas.filter(listaState => listaState._id !== id )
+        console.log(actualizarLista);
+        setListas(actualizarLista)
+        
+
+        setAlerta({
+            msg: data.msg,
+            error: false
+        })   
+        setTimeout(() => {
+            setAlerta({})
+            navigate('/listas')
+        }, 3000);
+        } catch (error) {
+            console.log(error);            
+        }  
     }
 
     return (
