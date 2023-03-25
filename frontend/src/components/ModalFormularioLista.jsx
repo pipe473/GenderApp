@@ -1,31 +1,16 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import useListas from '../hooks/useListas';
 
-const ModalFormularioLista = ({ modal, setModal}) => {
-//   let [isOpen, setIsOpen] = useState(false)
+const ModalFormularioLista = () => {
 
-//   function closeModal() {
-//     setIsOpen(false)
-//   }
-
-//   function openModal() {
-//     setIsOpen(true)
-//   }
+    const { modalFormularioLista, handleModaList } = useListas();
 
   return (
     <>
-      {/* <div className="fixed inset-0 flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          Open dialog
-        </button>
-      </div> */}
 
-      <Transition appear show={modal} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => setModal(false)}>
+      <Transition appear show={modalFormularioLista} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={handleModaList}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -66,7 +51,7 @@ const ModalFormularioLista = ({ modal, setModal}) => {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={ () => setModal(false) }
+                      onClick={ handleModaList }
                     >
                      Cerrar
                     </button>

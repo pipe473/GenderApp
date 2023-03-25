@@ -7,7 +7,7 @@ const Lista = () => {
 
     const params = useParams();
     // console.log(params);  
-    const { obtenerLista, lista, cargando } = useListas();
+    const { obtenerLista, lista, cargando, handleModaList } = useListas();
 
     const [modal, setModal] = useState(false)
 
@@ -34,7 +34,7 @@ const Lista = () => {
                 </div>
             </div>
                 <button
-                        onClick={() => setModal(true)}
+                        onClick={handleModaList}
                         type="button"
                         className="text-sm px-5 py-3 w-full md:w-auto rounded-lg uppercase bg-teal-400 text-white text-center mt-5 flex gap-2 items-center justify-center"
                     >
