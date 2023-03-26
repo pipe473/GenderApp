@@ -17,6 +17,9 @@ const Lista = () => {
 
    const { nombre } = lista 
 
+   console.log(lista);
+   
+
    if (cargando) return 'Cargando...'
 
     return ( 

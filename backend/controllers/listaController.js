@@ -2,7 +2,10 @@ import Lista from '../models/Lista.js';
 import Regalo from '../models/Regalo.js';
 
 const obtenerListas = async (req, res) => {
-    const listas = await Lista.find().where('creador').equals(req.usuario);
+    const listas = await Lista.find()
+        .where('creador')
+        .equals(req.usuario)
+        .select('-regalos');
 
     res.json(listas);
 };
@@ -25,7 +28,7 @@ const nuevaLista = async (req, res) => {
 const obtenerLista = async (req, res) => {
     const { id } = req.params;
 
-    const lista = await Lista.findById(id);
+    const lista = await Lista.findById(id).populate('regalos');
 
     if (!lista) {
        const error = new Error("Lista no encontrada");

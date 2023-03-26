@@ -8,6 +8,7 @@ const SELECCION = ['Me lo Pido', 'Comprado']
 
 const ModalFormularioLista = () => {
 
+    const [imagen, setImagen] = useState('');
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [fechaEvento, setFechaEvento] = useState();
@@ -20,14 +21,14 @@ const ModalFormularioLista = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        if ([nombre, descripcion, fechaEvento, seleccion].includes('')) {
+        if ([imagen, nombre, descripcion, fechaEvento, seleccion].includes('')) {
             mostrarAlerta({
                 msg: 'Todos los campos son obligatorios',
                 error: true
             })
             return
         }
-        submitRegalo({ nombre, descripcion, fechaEvento, seleccion, lista: params.id })
+        submitRegalo({ imagen, nombre, descripcion, fechaEvento, seleccion, lista: params.id })
     }
 
     const { msg } = alerta;
@@ -75,6 +76,24 @@ const ModalFormularioLista = () => {
                         className="my-10"
                         onSubmit={handleSubmit}
                    >
+                    
+                    <div className="mb-5">
+                        <label 
+                            className="text-teal-800 uppercase text-sm"
+                            htmlFor="imagen"
+                        >
+                            Imagen del regalo
+                        </label>
+                        <input 
+                            type="text"
+                            id="nombre"
+                            placeholder="Nombre del regalo"
+                            className="border-2 w-full p-2 mt-2 placeholder-teal-600 rounded-md"
+                            value={imagen}
+                            onChange={ e => setImagen(e.target.value) }
+                        />
+                    </div>
+                    
                     <div className="mb-5">
                         <label 
                             className="text-teal-800 uppercase text-sm"

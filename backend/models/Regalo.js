@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
 const regaloSchema = mongoose.Schema({
+    imagen: {
+        type: String,
+        trim: true,
+        required: true
+    },    
     nombre: {
         type: String,
         trim: true,
