@@ -23,7 +23,7 @@ const regaloSchema = mongoose.Schema({
     seleccion: {
         type: String,
         required: true,
-        enum: ['Me lo pido', 'Me lo pienso', 'Comprado']
+        enum: ['Me lo pido', 'Comprado']
     },
     lista: {
         type: mongoose.Schema.Types.ObjectId,
