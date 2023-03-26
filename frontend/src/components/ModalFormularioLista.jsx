@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import useListas from '../hooks/useListas';
 import Alerta from './Alerta';
+import { useParams } from 'react-router-dom';
 
 const SELECCION = ['Me lo Pido', 'Comprado']
 
@@ -9,21 +10,24 @@ const ModalFormularioLista = () => {
 
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
+    const [fechaEvento, setFechaEvento] = useState();
     const [seleccion, setSeleccion] = useState('');
+
+    const params = useParams();
 
     const { modalFormularioLista, handleModaList, mostrarAlerta, alerta, submitRegalo } = useListas();
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        if ([nombre, descripcion, seleccion].includes('')) {
+        if ([nombre, descripcion, fechaEvento, seleccion].includes('')) {
             mostrarAlerta({
                 msg: 'Todos los campos son obligatorios',
                 error: true
             })
             return
         }
-        submitRegalo({ nombre, descripcion, seleccion })
+        submitRegalo({ nombre, descripcion, fechaEvento, seleccion, lista: params.id })
     }
 
     const { msg } = alerta;
@@ -101,6 +105,22 @@ const ModalFormularioLista = () => {
                             className="border-2 w-full p-2 mt-2 placeholder-teal-600 rounded-md"
                             value={descripcion}
                             onChange={ e => setDescripcion(e.target.value) }
+                        />
+                    </div>
+
+                    <div className="mb-5">
+                        <label 
+                            className="text-teal-800 uppercase text-sm"
+                            htmlFor="fecha-evento"
+                        >
+                            Fecha Evento
+                        </label>
+                        <input 
+                            type="date"
+                            id="fechaEvento"
+                            className="border-2 w-full p-2 mt-2 placeholder-teal-600 rounded-md"
+                            value={fechaEvento}
+                            onChange={ e => setFechaEvento(e.target.value) }
                         />
                     </div>
 

@@ -176,7 +176,22 @@ const ListasProvider = ({ children }) => {
     }
 
     const submitRegalo = async  regalo => {
-        console.log(regalo);        
+        // console.log(regalo);   
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const { data } = await clienteAxios.post('/regalos', regalo, config)
+            console.log(data);            
+        } catch (error) {
+            console.log(error);            
+        }     
     }
 
     return (
