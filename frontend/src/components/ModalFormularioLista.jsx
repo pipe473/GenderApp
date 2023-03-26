@@ -4,11 +4,11 @@ import useListas from '../hooks/useListas';
 import Alerta from './Alerta';
 import { useParams } from 'react-router-dom';
 
-const SELECCION = ['Me lo Pido', 'Comprado']
+const SELECCION = ['Elegido', 'Comprado']
 
 const ModalFormularioLista = () => {
 
-    const [imagen, setImagen] = useState('');
+    // const [imagen, setImagen] = useState('');
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [fechaEvento, setFechaEvento] = useState();
@@ -21,14 +21,14 @@ const ModalFormularioLista = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        if ([imagen, nombre, descripcion, fechaEvento, seleccion].includes('')) {
+        if ([ nombre, descripcion, fechaEvento, seleccion].includes('')) {
             mostrarAlerta({
                 msg: 'Todos los campos son obligatorios',
                 error: true
             })
             return
         }
-        submitRegalo({ imagen, nombre, descripcion, fechaEvento, seleccion, lista: params.id })
+        submitRegalo({ nombre, descripcion, fechaEvento, seleccion, lista: params.id })
     }
 
     const { msg } = alerta;
@@ -77,7 +77,7 @@ const ModalFormularioLista = () => {
                         onSubmit={handleSubmit}
                    >
                     
-                    <div className="mb-5">
+                    {/* <div className="mb-5">
                         <label 
                             className="text-teal-800 uppercase text-sm"
                             htmlFor="imagen"
@@ -92,7 +92,7 @@ const ModalFormularioLista = () => {
                             value={imagen}
                             onChange={ e => setImagen(e.target.value) }
                         />
-                    </div>
+                    </div> */}
                     
                     <div className="mb-5">
                         <label 

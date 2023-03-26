@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
 const regaloSchema = mongoose.Schema({
-    imagen: {
-        type: String,
-        trim: true,
-        required: true
-    },    
+    // imagen: {
+    //     type: String,
+    //     trim: true,
+    //     required: true
+    // },    
     nombre: {
         type: String,
         trim: true,
@@ -28,7 +28,7 @@ const regaloSchema = mongoose.Schema({
     seleccion: {
         type: String,
         required: true,
-        enum: ['Me lo pido', 'Comprado']
+        enum: ['Elegido', 'Comprado']
     },
     lista: {
         type: mongoose.Schema.Types.ObjectId,

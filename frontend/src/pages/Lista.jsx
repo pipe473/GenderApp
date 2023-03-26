@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useListas from '../hooks/useListas';
 import ModalFormularioLista from '../components/ModalFormularioLista';
+import Regalo from '../components/Regalo';
 
 const Lista = () => {
 
@@ -15,10 +16,7 @@ const Lista = () => {
         obtenerLista(params.id)
     }, [])   
 
-   const { nombre } = lista 
-
-   console.log(lista);
-   
+   const { nombre } = lista    
 
    if (cargando) return 'Cargando...'
 
@@ -46,6 +44,20 @@ const Lista = () => {
                     </svg>                    
                     Nuevo Regalo
                 </button>
+
+                <p className="font-bold text-xl mt-10">Regalos del babyshower</p>
+
+                <div className="bg-white shadow mt-10 rounded-lg">
+                    {lista.regalos?.length ? 
+                        lista.regalos?.map( regalo => (
+                            <Regalo 
+                                key={regalo._id}
+                                regalo={regalo}
+                            />
+                        )) :
+                        <p className="text-center my-5 p-10">No hay ningun regalo en esta lista</p>}
+                </div>
+
             <ModalFormularioLista 
                 modal={modal}
                 setModal={setModal}
