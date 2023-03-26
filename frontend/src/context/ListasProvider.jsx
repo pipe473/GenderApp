@@ -175,6 +175,10 @@ const ListasProvider = ({ children }) => {
         setModalFormularioLista(!modalFormularioLista)
     }
 
+    const submitRegalo = async  regalo => {
+        console.log(regalo);        
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -187,7 +191,8 @@ const ListasProvider = ({ children }) => {
                 cargando,
                 eliminarLista,
                 modalFormularioLista,
-                handleModaList
+                handleModaList,
+                submitRegalo
             }}
         >{children}
 

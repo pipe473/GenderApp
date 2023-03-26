@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import useListas from '../hooks/useListas';
+import Alerta from './Alerta';
 
 const SELECCION = ['Me lo Pido', 'Comprado']
 
@@ -10,7 +11,22 @@ const ModalFormularioLista = () => {
     const [descripcion, setDescripcion] = useState('');
     const [seleccion, setSeleccion] = useState('');
 
-    const { modalFormularioLista, handleModaList } = useListas();
+    const { modalFormularioLista, handleModaList, mostrarAlerta, alerta, submitRegalo } = useListas();
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        if ([nombre, descripcion, seleccion].includes('')) {
+            mostrarAlerta({
+                msg: 'Todos los campos son obligatorios',
+                error: true
+            })
+            return
+        }
+        submitRegalo({ nombre, descripcion, seleccion })
+    }
+
+    const { msg } = alerta;
 
   return (
     <>
@@ -47,8 +63,14 @@ const ModalFormularioLista = () => {
                   >
                     Añadir regalo
                   </Dialog.Title>
+
+                { msg && <Alerta alerta={alerta} />}
+
                   <div className="mt-2">
-                   <form className="my-10">
+                   <form 
+                        className="my-10"
+                        onSubmit={handleSubmit}
+                   >
                     <div className="mb-5">
                         <label 
                             className="text-teal-800 uppercase text-sm"
@@ -62,7 +84,7 @@ const ModalFormularioLista = () => {
                             placeholder="Nombre del regalo"
                             className="border-2 w-full p-2 mt-2 placeholder-teal-600 rounded-md"
                             value={nombre}
-                            onClick={ e => setNombre(e.target.value) }
+                            onChange={ e => setNombre(e.target.value) }
                         />
                     </div>
 
@@ -78,7 +100,7 @@ const ModalFormularioLista = () => {
                             placeholder="Descripción del regalo"
                             className="border-2 w-full p-2 mt-2 placeholder-teal-600 rounded-md"
                             value={descripcion}
-                            onClick={ e => setDescripcion(e.target.value) }
+                            onChange={ e => setDescripcion(e.target.value) }
                         />
                     </div>
 
