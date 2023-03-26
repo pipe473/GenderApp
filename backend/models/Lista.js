@@ -24,6 +24,12 @@ const listaSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Usuario",
     },
+    regalos: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Regalo"
+        }
+    ],
     colaboradores: [
 
         {

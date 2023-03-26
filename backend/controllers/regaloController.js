@@ -19,6 +19,9 @@ const agregarRegalo = async (req, res) => {
 
     try {
         const regaloAlmacenado = await Regalo.create(req.body);
+        // Almacenar el ID en la lista
+        listaExiste.regalos.push(regaloAlmacenado._id);
+        await listaExiste.save();
         res.json(regaloAlmacenado);
     } catch (error) {
         console.log(error);        
