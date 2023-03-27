@@ -174,6 +174,7 @@ const ListasProvider = ({ children }) => {
 
     const handleModaList = () => {
         setModalFormularioLista(!modalFormularioLista)
+        setRegalo({})
     }
 
     const submitRegalo = async  regalo => {
