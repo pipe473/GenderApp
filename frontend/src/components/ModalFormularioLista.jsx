@@ -18,7 +18,7 @@ const ModalFormularioLista = () => {
 
     const { modalFormularioLista, handleModaList, mostrarAlerta, alerta, submitRegalo } = useListas();
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
 
         if ([ nombre, descripcion, fechaEvento, seleccion].includes('')) {
@@ -28,7 +28,12 @@ const ModalFormularioLista = () => {
             })
             return
         }
-        submitRegalo({ nombre, descripcion, fechaEvento, seleccion, lista: params.id })
+        await submitRegalo({ nombre, descripcion, fechaEvento, seleccion, lista: params.id })
+
+        setNombre('')
+        setDescripcion('')
+        setFechaEvento('')
+        setSeleccion('')
     }
 
     const { msg } = alerta;

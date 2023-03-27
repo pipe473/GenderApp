@@ -188,7 +188,14 @@ const ListasProvider = ({ children }) => {
                 }
             }
             const { data } = await clienteAxios.post('/regalos', regalo, config)
-            console.log(data);            
+            
+            // Agrega la tarea al state
+            const listaActualizada = { ...lista }
+            listaActualizada.regalos = [...lista.regalos, data]
+
+            setLista(listaActualizada)
+            setAlerta({})
+            setModalFormularioLista(false)
         } catch (error) {
             console.log(error);            
         }     
