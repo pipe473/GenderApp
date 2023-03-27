@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useListas from '../hooks/useListas';
 import ModalFormularioLista from '../components/ModalFormularioLista';
@@ -9,8 +9,6 @@ const Lista = () => {
     const params = useParams();
     // console.log(params);  
     const { obtenerLista, lista, cargando, handleModaList } = useListas();
-
-    const [modal, setModal] = useState(false)
 
     useEffect(() => {
         obtenerLista(params.id)
@@ -58,10 +56,7 @@ const Lista = () => {
                         <p className="text-center my-5 p-10">No hay ningun regalo en esta lista</p>}
                 </div>
 
-            <ModalFormularioLista 
-                modal={modal}
-                setModal={setModal}
-            />
+            <ModalFormularioLista />
         </>        
      );
 }

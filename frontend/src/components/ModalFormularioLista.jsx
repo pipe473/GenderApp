@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import useListas from '../hooks/useListas';
 import Alerta from './Alerta';
 import { useParams } from 'react-router-dom';
@@ -16,7 +16,11 @@ const ModalFormularioLista = () => {
 
     const params = useParams();
 
-    const { modalFormularioLista, handleModaList, mostrarAlerta, alerta, submitRegalo } = useListas();
+    const { modalFormularioLista, handleModaList, mostrarAlerta, alerta, submitRegalo, regalo } = useListas();
+
+    useEffect(() => {
+        console.log(regalo);        
+    }, [regalo])
 
     const handleSubmit = async e => {
         e.preventDefault();

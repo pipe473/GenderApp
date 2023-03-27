@@ -11,6 +11,7 @@ const ListasProvider = ({ children }) => {
     const [lista, setLista] = useState({});
     const [cargando, setCargando] = useState(false);
     const [modalFormularioLista, setModalFormularioLista] = useState(false);
+    const [regalo, setRegalo] = useState({})
 
     const navigate = useNavigate();
 
@@ -176,7 +177,6 @@ const ListasProvider = ({ children }) => {
     }
 
     const submitRegalo = async  regalo => {
-        // console.log(regalo);   
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -201,6 +201,12 @@ const ListasProvider = ({ children }) => {
         }     
     }
 
+    const handleModalEditarRegalo = regalo => {
+        // console.log(regalo); 
+        setRegalo(regalo)     
+        setModalFormularioLista(true)  
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -214,7 +220,9 @@ const ListasProvider = ({ children }) => {
                 eliminarLista,
                 modalFormularioLista,
                 handleModaList,
-                submitRegalo
+                submitRegalo,
+                handleModalEditarRegalo,
+                regalo
             }}
         >{children}
 
