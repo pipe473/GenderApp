@@ -178,6 +178,14 @@ const ListasProvider = ({ children }) => {
     }
 
     const submitRegalo = async  regalo => {
+        if (regalo?.id) {
+            await editarRegalo(regalo)
+        } else {
+            await crearRegalo(regalo)
+        }          
+    }
+
+    const crearRegalo = async regalo => {
         try {
             const token = localStorage.getItem('token')
             if (!token) return
@@ -199,7 +207,30 @@ const ListasProvider = ({ children }) => {
             setModalFormularioLista(false)
         } catch (error) {
             console.log(error);            
-        }     
+        }  
+    }
+
+    const editarRegalo = async regalo => {
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const { data } = await clienteAxios.put(`/regalos/${regalo.id}`, regalo, config)
+            // console.log(data);     
+            
+            setAlerta({})
+            setModalFormularioLista(false)
+
+        } catch (error) {
+            console.log(error);            
+        }
     }
 
     const handleModalEditarRegalo = regalo => {

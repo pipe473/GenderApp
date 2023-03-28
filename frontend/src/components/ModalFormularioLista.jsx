@@ -44,8 +44,9 @@ const ModalFormularioLista = () => {
             })
             return
         }
-        await submitRegalo({ nombre, descripcion, fechaEvento, seleccion, lista: params.id })
+        await submitRegalo({ id, nombre, descripcion, fechaEvento, seleccion, lista: params.id })
 
+        setId('')
         setNombre('')
         setDescripcion('')
         setFechaEvento('')
