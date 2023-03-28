@@ -223,8 +223,12 @@ const ListasProvider = ({ children }) => {
             }
 
             const { data } = await clienteAxios.put(`/regalos/${regalo.id}`, regalo, config)
-            // console.log(data);     
+            // console.log(data); 
             
+            const listaActualizada = { ...lista }
+            listaActualizada.regalos = listaActualizada.regalos.map( regaloState => 
+            regaloState._id === data._id ? data : regaloState )
+            setLista(listaActualizada)            
             setAlerta({})
             setModalFormularioLista(false)
 
