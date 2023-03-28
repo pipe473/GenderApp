@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useListas from '../hooks/useListas';
 import ModalFormularioLista from '../components/ModalFormularioLista';
+import ModalEliminarRegalo from '../components/ModalEliminarRegalo';
 import Regalo from '../components/Regalo';
 
 const Lista = () => {
@@ -57,6 +58,7 @@ const Lista = () => {
                 </div>
 
             <ModalFormularioLista />
+            <ModalEliminarRegalo />
         </>        
      );
 }

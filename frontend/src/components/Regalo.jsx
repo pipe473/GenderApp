@@ -3,7 +3,7 @@ import useListas from '../hooks/useListas';
 
 const Regalo = ({regalo}) => {
 
-    const { handleModalEditarRegalo } = useListas();
+    const { handleModalEditarRegalo, handleModalEliminarRegalo } = useListas();
 
     const { descripcion, nombre, seleccion, fechaEvento, estado, _id } = regalo
 
@@ -18,7 +18,7 @@ const Regalo = ({regalo}) => {
             </div>
             <div className="flex gap-2">
                 <button
-                    className="bg-indigo-500 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+                    className="bg-amber-600 hover:bg-amber-800 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
                     onClick={ () => handleModalEditarRegalo(regalo)}
                 >
                     editar
@@ -42,6 +42,7 @@ const Regalo = ({regalo}) => {
                 
                 <button
                     className="bg-red-500 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
+                    onClick={ () => handleModalEliminarRegalo(regalo) }
                 >
                     eliminar
                 </button>

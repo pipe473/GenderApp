@@ -12,6 +12,7 @@ const ListasProvider = ({ children }) => {
     const [cargando, setCargando] = useState(false);
     const [modalFormularioLista, setModalFormularioLista] = useState(false);
     const [regalo, setRegalo] = useState({})
+    const [modalEliminarRegalo, setModalEliminarRegalo] = useState(false);
 
     const navigate = useNavigate();
 
@@ -243,6 +244,11 @@ const ListasProvider = ({ children }) => {
         setModalFormularioLista(true)  
     }
 
+    const handleModalEliminarRegalo = regalo =>{
+        setRegalo(regalo)
+        setModalEliminarRegalo(!modalEliminarRegalo)
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -258,7 +264,9 @@ const ListasProvider = ({ children }) => {
                 handleModaList,
                 submitRegalo,
                 handleModalEditarRegalo,
-                regalo
+                regalo,
+                modalEliminarRegalo,
+                handleModalEliminarRegalo
             }}
         >{children}
 
