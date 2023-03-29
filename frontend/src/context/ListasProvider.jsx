@@ -249,6 +249,40 @@ const ListasProvider = ({ children }) => {
         setModalEliminarRegalo(!modalEliminarRegalo)
     }
 
+    const eliminarRegalos = async () => {
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const { data } = await clienteAxios.delete(`/regalos/${regalo._id}`, config)
+            // console.log(data); 
+            setAlerta({
+                msg: data.msg,
+                error: false
+            })
+            
+            const listaActualizada = { ...lista }
+            listaActualizada.regalos = listaActualizada.regalos.filter(regaloState => regaloState._id !== regalo._id)
+
+            setLista(listaActualizada)          
+            setModalEliminarRegalo(false)
+            setRegalo({})
+            setTimeout(() => {
+                setAlerta({})
+            }, 3000);
+
+        } catch (error) {
+            console.log(error);            
+        } 
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -266,7 +300,8 @@ const ListasProvider = ({ children }) => {
                 handleModalEditarRegalo,
                 regalo,
                 modalEliminarRegalo,
-                handleModalEliminarRegalo
+                handleModalEliminarRegalo,
+                eliminarRegalos
             }}
         >{children}
 

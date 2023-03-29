@@ -95,7 +95,7 @@ const eliminarRegalo = async (req, res) => {
 
     try {
         await regalo.deleteOne();
-        res.json({ msg: "Regalo eliminado correctamente" })
+        res.json({ msg: "El regalo se ha eliminado correctamente" })
     } catch (error) {
         console.log(error);
     }

@@ -4,7 +4,7 @@ import useListas from '../hooks/useListas';
 
 const ModalEliminarRegalo = () => {
 
-const { modalEliminarRegalo, handleModalEliminarRegalo } = useListas();
+const { modalEliminarRegalo, handleModalEliminarRegalo, eliminarRegalos } = useListas();
 
   return (
     <>
@@ -55,7 +55,7 @@ const { modalEliminarRegalo, handleModalEliminarRegalo } = useListas();
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={handleModalEliminarRegalo}
+                      onClick={eliminarRegalos}
                     >
                       Eliminar
                     </button>

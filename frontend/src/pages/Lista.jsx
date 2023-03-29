@@ -4,12 +4,13 @@ import useListas from '../hooks/useListas';
 import ModalFormularioLista from '../components/ModalFormularioLista';
 import ModalEliminarRegalo from '../components/ModalEliminarRegalo';
 import Regalo from '../components/Regalo';
+import Alerta from '../components/Alerta';
 
 const Lista = () => {
 
     const params = useParams();
     // console.log(params);  
-    const { obtenerLista, lista, cargando, handleModaList } = useListas();
+    const { obtenerLista, lista, cargando, handleModaList, alerta } = useListas();
 
     useEffect(() => {
         obtenerLista(params.id)
@@ -18,6 +19,8 @@ const Lista = () => {
    const { nombre } = lista    
 
    if (cargando) return 'Cargando...'
+
+   const { msg } = alerta
 
     return ( 
         <>
@@ -45,6 +48,12 @@ const Lista = () => {
                 </button>
 
                 <p className="font-bold text-xl mt-10">Regalos del babyshower</p>
+
+                <div className="flex justify-center">
+                    <div className="md:w-1/3 lg:w-1/4">
+                        { msg && <Alerta alerta={alerta} />}
+                    </div>
+                </div>
 
                 <div className="bg-white shadow mt-10 rounded-lg">
                     {lista.regalos?.length ? 
