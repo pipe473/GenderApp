@@ -65,6 +65,14 @@ const Lista = () => {
                         )) :
                         <p className="text-center my-5 p-10">No hay ningun regalo en esta lista</p>}
                 </div>
+                <div className="flex items-center justify-between mt-10">
+                    <p className="font-bold text-xl">Invitados babyshower</p>
+                    <Link
+                        to={`/listas/agregar-colaborador/${lista._id}`}
+                        className="text-teal-400 hover:text-teal-800 uppercase"
+                    >
+                    Añadir</Link>
+                </div>
 
             <ModalFormularioLista />
             <ModalEliminarRegalo />
