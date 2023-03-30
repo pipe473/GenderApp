@@ -283,6 +283,10 @@ const ListasProvider = ({ children }) => {
         } 
     }
 
+    const submitColaborador = async email => {
+        console.log(email);        
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -301,7 +305,8 @@ const ListasProvider = ({ children }) => {
                 regalo,
                 modalEliminarRegalo,
                 handleModalEliminarRegalo,
-                eliminarRegalos
+                eliminarRegalos,
+                submitColaborador
             }}
         >{children}
 
