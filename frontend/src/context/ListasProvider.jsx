@@ -314,6 +314,10 @@ const ListasProvider = ({ children }) => {
         }   
     }
 
+    const agregarInvitado = async email => {
+        console.log(email);        
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -333,7 +337,9 @@ const ListasProvider = ({ children }) => {
                 modalEliminarRegalo,
                 handleModalEliminarRegalo,
                 eliminarRegalos,
-                submitColaborador
+                submitColaborador,
+                invitado,
+                agregarInvitado
             }}
         >{children}
 
