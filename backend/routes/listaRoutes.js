@@ -6,6 +6,7 @@ import {
     obtenerLista,
     editarLista,
     eliminarLista,
+    buscarInvitado,
     agregarInvitado,
     eliminarInvitado
  } from '../controllers/listaController.js';
@@ -26,8 +27,9 @@ router
     .delete( checkAuth, eliminarLista );
 
     // router.get("/listas/:id", checkAuth, obtenerListaProductos);
-    router.post('/agregar-colaborador/:id', checkAuth, agregarInvitado);
-    router.delete('/eliminar-colaborador/:id', checkAuth, eliminarInvitado);
+    router.post('/colaboradores/', checkAuth, buscarInvitado);
+    router.post('/colaboradores/:id', checkAuth, agregarInvitado);
+    router.delete('/colaboradores/:id', checkAuth, eliminarInvitado);
 
 
  export default router;

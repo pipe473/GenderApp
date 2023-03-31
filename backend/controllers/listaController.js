@@ -1,5 +1,5 @@
 import Lista from '../models/Lista.js';
-import Regalo from '../models/Regalo.js';
+import Usuario from '../models/Usuario.js';
 
 const obtenerListas = async (req, res) => {
     const listas = await Lista.find()
@@ -98,6 +98,18 @@ const eliminarLista = async (req, res) => {
     }
 };
 
+const buscarInvitado = async (req, res) => {
+    const {email} = req.body;    
+    const usuario = await Usuario.findOne({email}).select('-confirmado -createdAt -password -token -updatedAt -__v')
+
+    if (!usuario) {
+        const error = new Error("Usuario no encontrado");
+        return res.status(404).json({msg: error.message})
+    }
+
+    res.json(usuario)
+};
+
 const agregarInvitado = async (req, res) => {};
 
 const eliminarInvitado = async (req, res) => {};
@@ -109,6 +121,7 @@ export {
     obtenerLista,
     editarLista,
     eliminarLista,
+    buscarInvitado,
     agregarInvitado,
     eliminarInvitado
 }

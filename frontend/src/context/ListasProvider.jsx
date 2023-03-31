@@ -13,6 +13,7 @@ const ListasProvider = ({ children }) => {
     const [modalFormularioLista, setModalFormularioLista] = useState(false);
     const [regalo, setRegalo] = useState({})
     const [modalEliminarRegalo, setModalEliminarRegalo] = useState(false);
+    const [invitado, setInvitado] = useState({});
 
     const navigate = useNavigate();
 
@@ -284,7 +285,33 @@ const ListasProvider = ({ children }) => {
     }
 
     const submitColaborador = async email => {
-        console.log(email);        
+
+        setCargando(true)
+
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const { data } = await clienteAxios.post('/listas/colaboradores', {email}, config)
+
+            setInvitado(data)
+            setAlerta({})           
+
+        } catch (error) {
+            setAlerta({
+                msg: error.response.data.msg,
+                error: true
+            })            
+        } finally {
+            setCargando(false)
+        }   
     }
 
     return (
