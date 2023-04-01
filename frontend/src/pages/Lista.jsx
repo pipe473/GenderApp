@@ -5,6 +5,7 @@ import ModalFormularioLista from '../components/ModalFormularioLista';
 import ModalEliminarRegalo from '../components/ModalEliminarRegalo';
 import Regalo from '../components/Regalo';
 import Alerta from '../components/Alerta';
+import Invitado from '../components/Invitado';
 
 const Lista = () => {
 
@@ -17,6 +18,9 @@ const Lista = () => {
     }, [])   
 
    const { nombre } = lista    
+
+   console.log(lista);
+   
 
    if (cargando) return 'Cargando...'
 
@@ -72,6 +76,17 @@ const Lista = () => {
                         className="text-teal-400 hover:text-teal-800 uppercase"
                     >
                     Añadir</Link>
+                </div>
+
+                <div className="bg-white shadow mt-10 rounded-lg">
+                    {lista.colaboradores?.length ? 
+                        lista.colaboradores?.map( colaborador => (
+                           <Invitado
+                                key={colaborador._id}
+                                colaborador={colaborador}
+                           />
+                        )) :
+                        <p className="text-center my-5 p-10">No hay ningun colaborador invitado en esta lista</p>}
                 </div>
 
             <ModalFormularioLista />

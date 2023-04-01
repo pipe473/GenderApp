@@ -28,7 +28,9 @@ const nuevaLista = async (req, res) => {
 const obtenerLista = async (req, res) => {
     const { id } = req.params;
 
-    const lista = await Lista.findById(id).populate('regalos');
+    const lista = await Lista.findById(id)
+        .populate('regalos')
+        .populate('colaboradores', 'nombre email');
 
     if (!lista) {
        const error = new Error("Lista no encontrada");
