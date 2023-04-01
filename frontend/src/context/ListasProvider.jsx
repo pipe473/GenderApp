@@ -134,7 +134,8 @@ const ListasProvider = ({ children }) => {
             }
             const { data } = await clienteAxios(`/listas/${id}`, config)
             // console.log(data);   
-            setLista(data);         
+            setLista(data);    
+            setAlerta({})     
         } catch (error) {
            setAlerta({
                msg: error.response.data.msg,
@@ -339,7 +340,10 @@ const ListasProvider = ({ children }) => {
            })
             
            setInvitado({})
-           setAlerta({})
+           
+           setTimeout(() => {
+            setAlerta({})
+           }, 3000);
 
         } catch (error) {
             setAlerta({
@@ -382,6 +386,10 @@ const ListasProvider = ({ children }) => {
             })
             setInvitado({})
             setModalEliminarInvitado(false)
+
+            setTimeout(() => {
+                setAlerta({})
+               }, 3000);
 
 
         } catch (error) {

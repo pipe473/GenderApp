@@ -25,6 +25,7 @@ const Lista = () => {
    const { msg } = alerta
 
     return ( 
+        msg && alerta.error ? <Alerta alerta={alerta} /> : (
         <>
             <div className="flex justify-between">
                 <h1 className="font-black text-4xl">{nombre}</h1>
@@ -91,7 +92,8 @@ const Lista = () => {
             <ModalEliminarRegalo />
             <ModalEliminarInvitado />
         </>        
-     );
+     )
+     )
 }
  
 export default Lista;

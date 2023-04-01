@@ -13,8 +13,6 @@ const obtenerListas = async (req, res) => {
 };
 
 const nuevaLista = async (req, res) => {
-    // console.log(req.body);    
-    // console.log(req.usuario);
     const lista = new Lista(req.body);
     lista.creador = req.usuario._id;
 
@@ -39,7 +37,7 @@ const obtenerLista = async (req, res) => {
        return res.status(404).json({ msg: error.message });  
     }   
 
-    if (lista.creador.toString() !== req.usuario._id.toString() ) {
+    if (lista.creador.toString() !== req.usuario._id.toString() && !lista.colaboradores.some( colaborador => colaborador._id.toString() === req.usuario._id )) {
         const error = new Error("Acción no válida, no tienes los permisos para acceder a esta lista");
         return res.status(401).json({ msg: error.message });  
     }  
