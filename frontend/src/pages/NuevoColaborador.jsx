@@ -2,10 +2,11 @@ import FormularioColaborador from '../components/FormularioColaborador';
 import { useEffect } from 'react';
 import useListas from '../hooks/useListas';
 import { useParams } from 'react-router-dom';
+import Alerta from '../components/Alerta';
 
 const NuevoColaborador = () => {
 
-    const { obtenerLista, lista, cargando, invitado, agregarInvitado } = useListas();
+    const { obtenerLista, lista, cargando, invitado, agregarInvitado, alerta } = useListas();
     const params = useParams()
 
     useEffect(() => {
@@ -13,6 +14,8 @@ const NuevoColaborador = () => {
     }, []);
 
     // console.log(invitado);    
+
+    if (!lista) return <Alerta alerta={alerta} />
 
     return ( 
         <>

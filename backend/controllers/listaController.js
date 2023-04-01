@@ -103,14 +103,54 @@ const buscarInvitado = async (req, res) => {
     const usuario = await Usuario.findOne({email}).select('-confirmado -createdAt -password -token -updatedAt -__v')
 
     if (!usuario) {
-        const error = new Error("Usuario no encontrado");
+        const error = new Error("EMail de usuario invitado no encontrado");
         return res.status(404).json({msg: error.message})
     }
 
     res.json(usuario)
 };
 
-const agregarInvitado = async (req, res) => {};
+const agregarInvitado = async (req, res) => {
+    // console.log(req.params.id);    
+    const lista = await Lista.findById(req.params.id)
+
+    if (!lista) {
+        const error = new Error("Lista no encontrada");
+        return res.status(404).json({msg: error.message})
+    }
+
+    if (lista.creador._id.toString() !== req.usuario._id.toString()) {
+        const error = new Error("No tienes permisos para añadir invitados, la lista no ha sido creada por ti");
+        return res.status(404).json({msg: error.message})
+    }
+
+    // console.log(req.body);    
+
+    const {email} = req.body;    
+    const usuario = await Usuario.findOne({email}).select('-confirmado -createdAt -password -token -updatedAt -__v')
+
+    if (!usuario) {
+        const error = new Error("EMail de usuario invitado no encontrado");
+        return res.status(404).json({msg: error.message})
+    }
+
+    // El invitado no es el admin de la lista
+    if (lista.creador.toString() === usuario._id.toString()) {
+        const error = new Error("El creador de la lista no puede ser uno de los colaboradores invitad@s");
+        return res.status(404).json({msg: error.message})
+    }
+
+    // Revisar que ya no este agragado a la lista
+    if (lista.colaboradores.includes(usuario._id)) {
+        const error = new Error("El usuario ya pertenece a la lista");
+        return res.status(404).json({msg: error.message})
+    }
+
+    // Si todo se cumple ok
+    lista.colaboradores.push(usuario._id);
+    await lista.save();
+    res.json({ msg: 'Invitad@ colaborador agregado correctamente'})
+};
 
 const eliminarInvitado = async (req, res) => {};
 
