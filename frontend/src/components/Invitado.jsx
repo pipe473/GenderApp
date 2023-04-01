@@ -1,4 +1,8 @@
+import useListas from '../hooks/useListas';
+
 const Invitado = ({colaborador}) => {
+
+    const { handleModalEliminarInvitado } = useListas()
 
     const { nombre, email } = colaborador;
     return ( 
@@ -11,6 +15,7 @@ const Invitado = ({colaborador}) => {
                 <button
                     type="button"
                     className="bg-red-600 py-3 px-4 text-white uppercase font-bold text-sm rounded-lg"
+                    onClick={() => handleModalEliminarInvitado(colaborador)}
                 >
                     Eliminar
                 </button>

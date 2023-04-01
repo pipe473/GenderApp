@@ -14,6 +14,7 @@ const ListasProvider = ({ children }) => {
     const [regalo, setRegalo] = useState({})
     const [modalEliminarRegalo, setModalEliminarRegalo] = useState(false);
     const [invitado, setInvitado] = useState({});
+    const [modalEliminarInvitado, setModalEliminarInvitado] = useState(false);   
 
     const navigate = useNavigate();
 
@@ -348,6 +349,16 @@ const ListasProvider = ({ children }) => {
         }     
     }
 
+    const handleModalEliminarInvitado = (invitado) => {
+        setModalEliminarInvitado(!modalEliminarInvitado)
+        setInvitado(invitado);   
+        // console.log(invitado);        
+    }
+
+    const eliminarInvitado = () => {
+        console.log(invitado);        
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -369,7 +380,10 @@ const ListasProvider = ({ children }) => {
                 eliminarRegalos,
                 submitColaborador,
                 invitado,
-                agregarInvitado
+                agregarInvitado,
+                handleModalEliminarInvitado,
+                modalEliminarInvitado,
+                eliminarInvitado
             }}
         >{children}
 

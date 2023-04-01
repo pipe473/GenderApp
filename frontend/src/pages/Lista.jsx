@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import useListas from '../hooks/useListas';
 import ModalFormularioLista from '../components/ModalFormularioLista';
 import ModalEliminarRegalo from '../components/ModalEliminarRegalo';
+import ModalEliminarInvitado from '../components/ModalEliminarInvitado';
 import Regalo from '../components/Regalo';
 import Alerta from '../components/Alerta';
 import Invitado from '../components/Invitado';
@@ -17,10 +18,7 @@ const Lista = () => {
         obtenerLista(params.id)
     }, [])   
 
-   const { nombre } = lista    
-
-   console.log(lista);
-   
+   const { nombre } = lista       
 
    if (cargando) return 'Cargando...'
 
@@ -91,6 +89,7 @@ const Lista = () => {
 
             <ModalFormularioLista />
             <ModalEliminarRegalo />
+            <ModalEliminarInvitado />
         </>        
      );
 }
