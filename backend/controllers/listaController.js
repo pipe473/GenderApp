@@ -154,7 +154,30 @@ const agregarInvitado = async (req, res) => {
     res.json({ msg: 'Invitad@ colaborador agregado correctamente'})
 };
 
-const eliminarInvitado = async (req, res) => {};
+const eliminarInvitado = async (req, res) => {
+     // console.log(req.params.id);    
+     const lista = await Lista.findById(req.params.id)
+
+     if (!lista) {
+         const error = new Error("Lista no encontrada");
+         return res.status(404).json({msg: error.message})
+     }
+ 
+     if (lista.creador._id.toString() !== req.usuario._id.toString()) {
+         const error = new Error("No tienes permisos para añadir invitados, la lista no ha sido creada por ti");
+         return res.status(404).json({msg: error.message})
+     }
+ 
+     // console.log(req.body);    
+ 
+     const {email} = req.body;    
+ 
+      // Si todo se cumple ok se puede eliminar
+    lista.colaboradores.pull(req.body.id);     
+
+    await lista.save();
+    res.json({ msg: 'Invitad@ colaborador eliminado correctamente'})
+};
 
 
 export {

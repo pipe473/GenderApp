@@ -29,7 +29,7 @@ router
     // router.get("/listas/:id", checkAuth, obtenerListaProductos);
     router.post('/colaboradores/', checkAuth, buscarInvitado);
     router.post('/colaboradores/:id', checkAuth, agregarInvitado);
-    router.delete('/colaboradores/:id', checkAuth, eliminarInvitado);
+    router.post('/eliminar-colaborador/:id', checkAuth, eliminarInvitado);
 
 
  export default router;

@@ -355,8 +355,40 @@ const ListasProvider = ({ children }) => {
         // console.log(invitado);        
     }
 
-    const eliminarInvitado = () => {
-        console.log(invitado);        
+    const eliminarInvitado = async () => {
+        // console.log(invitado);   
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const { data } = await clienteAxios.post(`/listas/eliminar-colaborador/${lista._id}`, { id: invitado._id }, config)
+
+            const listActualizada = {...lista}
+
+            listActualizada.colaboradores = listActualizada.colaboradores.filter( invitadoState => invitadoState._id !== invitado._id )
+
+            setLista(listActualizada)
+
+            setAlerta({
+                msg: data.msg,
+                error: false
+            })
+
+            setInvitado({})
+
+            setModalEliminarInvitado(false)
+
+
+        } catch (error) {
+            console.log(error.response);            
+        }     
     }
 
     return (
