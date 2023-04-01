@@ -1,6 +1,22 @@
-const Invitado = () => {
+const Invitado = ({colaborador}) => {
+
+    const { nombre, email } = colaborador;
     return ( 
-        <div>Invitado</div>
+        <div className="border-b p-5 flex justify-between items-center">
+            <div>
+                <p>{nombre}</p>
+                <p className="text-sm text-gray-700">{email}</p>
+            </div>
+            <div>
+                <button
+                    type="button"
+                    className="bg-red-600 py-3 px-4 text-white uppercase font-bold text-sm rounded-lg"
+                >
+                    Eliminar
+                </button>
+            </div>
+        </div>
+
      );
 }
  
