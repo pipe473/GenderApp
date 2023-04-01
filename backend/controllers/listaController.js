@@ -2,10 +2,12 @@ import Lista from '../models/Lista.js';
 import Usuario from '../models/Usuario.js';
 
 const obtenerListas = async (req, res) => {
-    const listas = await Lista.find()
-        .where('creador')
-        .equals(req.usuario)
-        .select('-regalos');
+    const listas = await Lista.find({
+        '$or' : [
+          {'colaboradores': {$in: req.usuario}},
+          {'creador': {$in: req.usuario}},
+        ]
+    }).select('-regalos');
 
     res.json(listas);
 };
@@ -41,10 +43,6 @@ const obtenerLista = async (req, res) => {
         const error = new Error("Acción no válida, no tienes los permisos para acceder a esta lista");
         return res.status(401).json({ msg: error.message });  
     }  
-
-    //  Obtener los regalos de la lista
-    //  const regalos = await Regalo.find().where("lista").equals(lista._id);
-    //  console.log(regalo);    
 
     res.json(lista);
 };

@@ -380,9 +380,7 @@ const ListasProvider = ({ children }) => {
                 msg: data.msg,
                 error: false
             })
-
             setInvitado({})
-
             setModalEliminarInvitado(false)
 
 
