@@ -409,9 +409,16 @@ const ListasProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             }
-            const { data } = clienteAxios.post(`/regalos/estado/${id}`, {}, config)
+            const { data } = await clienteAxios.post(`/regalos/estado/${id}`, {}, config)
 
-            console.log(data);
+            // console.log(data);
+            const listActualizada = {...lista}
+
+            listActualizada.regalos = listActualizada.regalos.map(regaloState => regaloState._id === data._id ? data : regaloState )
+
+            setLista(listActualizada)
+            setRegalo({})
+            setAlerta({})
             
             
         } catch (error) {

@@ -102,7 +102,24 @@ const eliminarRegalo = async (req, res) => {
 };
 
 const cambiarEstado = async (req, res) => {
-    console.log(req.params.id);    
+    const { id } = req.params;
+    const regalo = await Regalo.findById(id).populate("lista");
+
+    if (!regalo) {
+        const error = new Error("No se encuentra el regalo");
+        return res.status(404).json({ msg: error.message });
+    }  
+
+    if (regalo.lista.creador.toString() !== req.usuario._id.toString() && 
+    !regalo.lista.colaboradores.some( 
+         (colaborador) => colaborador._id.toString() === req.usuario._id.toString() )) {
+        const error = new Error("Acción no válida, no tienes los permisos para acceder a esta lista");
+        return res.status(401).json({ msg: error.message });  
+    }  
+
+    regalo.estado = !regalo.estado;
+    await regalo.save()
+    res.json(regalo)
 };
 
 export { 
