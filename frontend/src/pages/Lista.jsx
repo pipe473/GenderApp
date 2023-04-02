@@ -31,7 +31,6 @@ const Lista = () => {
    
 
     return ( 
-        msg && alerta.error ? <Alerta alerta={alerta} /> : (
         <>
             <div className="flex justify-between">
                 <h1 className="font-black text-4xl">{nombre}</h1>
@@ -63,36 +62,29 @@ const Lista = () => {
              )}
 
                 <p className="font-bold text-xl mt-10">Regalos del babyshower</p>
+                        <div className="bg-white shadow mt-10 rounded-lg">
+                            {lista.regalos?.length ? 
+                                lista.regalos?.map( regalo => (
+                                    <Regalo 
+                                        key={regalo._id}
+                                        regalo={regalo}
+                                    />
+                                )) :
+                                <p className="text-center my-5 p-10">No hay ningun regalo en esta lista</p>}
+                        </div>
 
-                <div className="flex justify-center">
-                    <div className="md:w-1/3 lg:w-1/4">
-                        { msg && <Alerta alerta={alerta} />}
-                    </div>
-                </div>
-
-                <div className="bg-white shadow mt-10 rounded-lg">
-                    {lista.regalos?.length ? 
-                        lista.regalos?.map( regalo => (
-                            <Regalo 
-                                key={regalo._id}
-                                regalo={regalo}
-                            />
-                        )) :
-                        <p className="text-center my-5 p-10">No hay ningun regalo en esta lista</p>}
-                </div>
-
-                {admin && (
+                    {admin && (
                     <>
-                <div className="flex items-center justify-between mt-10">
-                    <p className="font-bold text-xl">Invitados babyshower</p>
-                    <Link
-                        to={`/listas/agregar-colaborador/${lista._id}`}
-                        className="text-teal-400 hover:text-teal-800 uppercase"
-                    >
-                    Añadir</Link>
-                </div>
+                        <div className="flex items-center justify-between mt-10">
+                            <p className="font-bold text-xl">Invitados babyshower</p>
+                            <Link
+                                to={`/listas/agregar-colaborador/${lista._id}`}
+                                className="text-teal-400 hover:text-teal-800 uppercase"
+                            >
+                            Añadir</Link>
+                        </div>
 
-                <div className="bg-white shadow mt-10 rounded-lg">
+                        <div className="bg-white shadow mt-10 rounded-lg">
                     {lista.colaboradores?.length ? 
                         lista.colaboradores?.map( colaborador => (
                            <Invitado
@@ -102,14 +94,14 @@ const Lista = () => {
                         )) :
                         <p className="text-center my-5 p-10">No hay ningun colaborador invitado en esta lista</p>}
                 </div>
-                </>
+                    </>
                 )}
 
             <ModalFormularioLista />
             <ModalEliminarRegalo />
             <ModalEliminarInvitado />
         </>        
-     )
+     
      )
 }
  

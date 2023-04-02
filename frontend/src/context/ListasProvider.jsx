@@ -137,10 +137,14 @@ const ListasProvider = ({ children }) => {
             setLista(data);    
             setAlerta({})     
         } catch (error) {
+           navigate('/listas')
            setAlerta({
                msg: error.response.data.msg,
                error: true
-           })         
+           })       
+           setTimeout(() => {
+              setAlerta({}) 
+           }, 3000);  
         } finally {
             setCargando(false);
         }     

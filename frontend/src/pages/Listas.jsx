@@ -1,15 +1,22 @@
 import useListas from '../hooks/useListas';
 import PreviewLista from '../components/PreviewLista';
+import Alerta from '../components/Alerta';
 
 const Listas = () => {
 
-    const { listas } = useListas();    
+    const { listas, alerta } = useListas();    
+    // console.log(listas);    
 
-    console.log(listas);    
+    const { msg } = alerta
+
+
 
     return ( 
             <>
                 <h1 className="text-4xl text-teal-800">Listas</h1>
+
+                { msg && <Alerta alerta={alerta} />}
+
                 <div className="bg-white shadow mt-10 rounded-lg">
                 {listas.length ? 
                     listas.map(lista => (
