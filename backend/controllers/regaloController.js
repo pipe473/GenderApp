@@ -101,7 +101,9 @@ const eliminarRegalo = async (req, res) => {
     }
 };
 
-const cambiarEstado = async (req, res) => {};
+const cambiarEstado = async (req, res) => {
+    console.log(req.params.id);    
+};
 
 export { 
     agregarRegalo,

@@ -4,7 +4,7 @@ import useAdmin from '../hooks/useAdmin';
 
 const Regalo = ({regalo}) => {
 
-    const { handleModalEditarRegalo, handleModalEliminarRegalo } = useListas();
+    const { handleModalEditarRegalo, handleModalEliminarRegalo, completarRegalo } = useListas();
 
     const admin = useAdmin();
 
@@ -28,20 +28,12 @@ const Regalo = ({regalo}) => {
                 </button>
 
                 )}
-
-                { estado ? (
-                    <button
-                        className="bg-teal-500 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                    >
-                        completa
-                    </button>  
-                ) : (
-                    <button
-                        className="bg-amber-300 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
-                    >
-                        incompleta
-                    </button>
-                ) }
+                <button
+                className={`${estado ? 'bg-teal-500' : 'bg-amber-300'} px-4 py-3 text-white uppercase font-bold text-sm rounded-lg`}
+                onClick={() => completarRegalo(_id) }
+                >
+                   {estado ? 'Completa' : 'Incompleta'}
+                </button>  
 
                   { admin && (            
                 
