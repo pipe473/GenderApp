@@ -1,28 +1,33 @@
 import { formatearFecha } from '../helpers/formatearFecha';
 import useListas from '../hooks/useListas';
+import useAdmin from '../hooks/useAdmin';
 
 const Regalo = ({regalo}) => {
 
     const { handleModalEditarRegalo, handleModalEliminarRegalo } = useListas();
+
+    const admin = useAdmin();
 
     const { descripcion, nombre, seleccion, fechaEvento, estado, _id } = regalo
 
     return ( 
         <div className="border-b p-5 flex justify-between items-center">
             <div className="">
-                {/* <img>src={"imagen"}</img> */}
                 <p className="mb-1 text-xl">{nombre}</p>
                 <p className="mb-1 text-sm text-gray-500 uppercas">{descripcion}</p>
                 <p className="mb-1 text-sm">{formatearFecha(fechaEvento) }</p>
                 <p className="mb-1 text-xl text-gray-600 ">Estado: {seleccion}</p>
             </div>
             <div className="flex gap-2">
+                { admin && (
                 <button
                     className="bg-amber-600 hover:bg-amber-800 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
                     onClick={ () => handleModalEditarRegalo(regalo)}
                 >
                     editar
                 </button>
+
+                )}
 
                 { estado ? (
                     <button
@@ -38,7 +43,7 @@ const Regalo = ({regalo}) => {
                     </button>
                 ) }
 
-                              
+                  { admin && (            
                 
                 <button
                     className="bg-red-500 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
@@ -46,6 +51,7 @@ const Regalo = ({regalo}) => {
                 >
                     eliminar
                 </button>
+                )}
             </div>
         </div>
      );
