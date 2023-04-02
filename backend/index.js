@@ -30,13 +30,17 @@ const corsOptions = {
   },
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 // Routing
 app.use('/api/usuarios', usuarioRoutes );
 app.use('/api/listas', listRoutes );
 app.use('/api/regalos', regaloRoutes );
+
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
 
 const PORT = process.env.PORT || 4500;
 
