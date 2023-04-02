@@ -2,6 +2,7 @@ import Lista from '../models/Lista.js';
 import Usuario from '../models/Usuario.js';
 
 const obtenerListas = async (req, res) => {
+    console.log('USER', req.usuario)
     const listas = await Lista.find({
         '$or' : [
           {'colaboradores': {$in: req.usuario}},
