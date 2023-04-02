@@ -102,7 +102,7 @@ const FormularioLista = () => {
                     <label
                         className="text-gray-700 uppercase font-bold text-sm"
                         htmlFor="invitada"
-                    >Nombre de Invitad@</label>
+                    >Nombre de Creador@</label>
                     <input 
                         id="invitada"
                         type="text"

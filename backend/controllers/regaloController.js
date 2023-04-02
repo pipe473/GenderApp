@@ -94,6 +94,12 @@ const eliminarRegalo = async (req, res) => {
     }
 
     try {
+        const lista = await Lista.findById(regalo.lista)
+        lista.regalos.pull(regalo._id);
+
+        await Promise.allSettled([await lista.save(), await regalo.deleteOne()]);
+
+
         await regalo.deleteOne();
         res.json({ msg: "El regalo se ha eliminado correctamente" })
     } catch (error) {
