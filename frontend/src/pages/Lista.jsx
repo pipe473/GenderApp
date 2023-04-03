@@ -23,7 +23,10 @@ const Lista = () => {
         obtenerLista(params.id)
     }, [])   
 
-   const { nombre } = lista       
+   const { nombre } = lista      
+   
+   console.log(lista);
+   
 
    if (cargando) return 'Cargando...'
 

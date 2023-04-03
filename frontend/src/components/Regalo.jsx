@@ -16,7 +16,8 @@ const Regalo = ({regalo}) => {
                 <p className="mb-1 text-xl">{nombre}</p>
                 <p className="mb-1 text-sm text-gray-500 uppercas">{descripcion}</p>
                 <p className="mb-1 text-sm">{formatearFecha(fechaEvento) }</p>
-                <p className="mb-1 text-xl text-gray-600 ">Estado: {seleccion}</p>
+                    { estado && <p className="mb-1 text-xs">Elegida por: {regalo.elegido.nombre}</p>}
+                <p className={`${estado === true ? 'bg-red-500' : 'bg-green-500'} p-1 text-xs rounded-lg text-white text-center uppercase`}>Estado: {seleccion === 'Elegido' ? 'No disponible' : 'Disponible'}</p>
             </div>
             <div className="flex gap-2">
                 { admin && (
@@ -29,10 +30,10 @@ const Regalo = ({regalo}) => {
 
                 )}
                 <button
-                className={`${estado ? 'bg-teal-500' : 'bg-amber-300'} px-4 py-3 text-white uppercase font-bold text-sm rounded-lg`}
+                className={`${estado ? 'bg-red-500' : 'bg-green-500'} px-4 py-3 text-white uppercase font-bold text-sm rounded-lg`}
                 onClick={() => completarRegalo(_id) }
                 >
-                   {estado ? 'Completa' : 'Incompleta'}
+                   {estado ? 'Elegido' : 'Sin elegir'}
                 </button>  
 
                   { admin && (            

@@ -110,6 +110,7 @@ const eliminarRegalo = async (req, res) => {
 const cambiarEstado = async (req, res) => {
     const { id } = req.params;
     const regalo = await Regalo.findById(id).populate("lista");
+    
 
     if (!regalo) {
         const error = new Error("No se encuentra el regalo");
@@ -124,8 +125,12 @@ const cambiarEstado = async (req, res) => {
     }  
 
     regalo.estado = !regalo.estado;
-    await regalo.save()
-    res.json(regalo)
+    regalo.elegido = req.usuario._id;
+    await regalo.save();
+
+    const regaloAmacenado = await Regalo.findById(id).populate("lista").populate("elegido");
+
+    res.json(regaloAmacenado)
 };
 
 export { 

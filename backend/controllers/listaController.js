@@ -30,7 +30,7 @@ const obtenerLista = async (req, res) => {
     const { id } = req.params;
 
     const lista = await Lista.findById(id)
-        .populate('regalos')
+        .populate({path: "regalos", populate: {path: "elegido", select: "nombre"}})
         .populate('colaboradores', 'nombre email');
 
     if (!lista) {
