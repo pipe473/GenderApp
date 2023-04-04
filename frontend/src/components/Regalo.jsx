@@ -19,7 +19,7 @@ const Regalo = ({regalo}) => {
                     { estado && <p className="mb-1 text-xs">Elegida por: {regalo.elegido.nombre}</p>}
                 <p className={`${estado ? 'bg-red-500' : 'bg-green-500'} p-1 text-xs rounded-lg text-white text-center uppercase`}>Estado: {estado === true ? 'No disponible' : 'Disponible'}</p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col lg:flex-row gap-2">
                 { admin && (
                 <button
                     className="bg-amber-600 hover:bg-amber-800 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg"
