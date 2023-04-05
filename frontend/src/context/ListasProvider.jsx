@@ -15,6 +15,7 @@ const ListasProvider = ({ children }) => {
     const [modalEliminarRegalo, setModalEliminarRegalo] = useState(false);
     const [invitado, setInvitado] = useState({});
     const [modalEliminarInvitado, setModalEliminarInvitado] = useState(false);   
+    const [buscador, setBuscador] = useState(false);   
 
     const navigate = useNavigate();
 
@@ -430,6 +431,10 @@ const ListasProvider = ({ children }) => {
         }     
     }
 
+    const handleBuscador = () => {
+        setBuscador(!buscador)
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -455,8 +460,11 @@ const ListasProvider = ({ children }) => {
                 handleModalEliminarInvitado,
                 modalEliminarInvitado,
                 eliminarInvitado,
-                completarRegalo
+                completarRegalo,
+                buscador,
+                handleBuscador
             }}
+
         >{children}
 
         </ListasContext.Provider>
