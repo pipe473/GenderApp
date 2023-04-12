@@ -8,6 +8,9 @@ import ModalEliminarInvitado from '../components/ModalEliminarInvitado';
 import Regalo from '../components/Regalo';
 import Alerta from '../components/Alerta';
 import Invitado from '../components/Invitado';
+import io from 'socket.io-client';
+
+let socket;
 
 const Lista = () => {
 
@@ -16,12 +19,22 @@ const Lista = () => {
     const { obtenerLista, lista, cargando, handleModaList, alerta } = useListas();
 
     const admin = useAdmin();
-    console.log(admin);
-    
+    // console.log(admin);  
 
     useEffect(() => {
         obtenerLista(params.id)
     }, [])   
+
+    useEffect(() => {
+        socket = io(import.meta.env.VITE_BACKEND_URL)
+        socket.emit('abrir lista', params.id)
+    }, [])
+
+    useEffect(() => {
+        socket.on('respuesta', (persona) => {
+            console.log(persona);            
+        })
+    })
 
    const { nombre } = lista      
    
