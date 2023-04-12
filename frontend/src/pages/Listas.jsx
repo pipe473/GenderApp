@@ -1,15 +1,21 @@
 import useListas from '../hooks/useListas';
 import PreviewLista from '../components/PreviewLista';
 import Alerta from '../components/Alerta';
+import io from 'socket.io-client';
+import { useEffect } from 'react';
+
+let socket;
 
 const Listas = () => {
 
     const { listas, alerta } = useListas();    
     // console.log(listas);    
 
+    useEffect(() =>{
+        socket = io(import.meta.env.VITE_BACKEND_URL)
+    }, [])
+
     const { msg } = alerta
-
-
 
     return ( 
             <>

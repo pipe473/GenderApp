@@ -44,6 +44,24 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 4500;
 
-app.listen(PORT, () => {
+const servidor = app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);    
 });
+
+// Añadiendo Socket.io
+
+import { Server, Socket } from 'socket.io';
+
+const io = new Server(servidor, {
+  pingTimeout: 60000,
+  cors: {
+    origin: process.env.FRONTEND_URL,
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log('Conectado a socket.io');
+  
+  // Definiendo los eventos de socket.io
+  
+})
