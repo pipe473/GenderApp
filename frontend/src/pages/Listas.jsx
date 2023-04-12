@@ -14,7 +14,11 @@ const Listas = () => {
     useEffect(() =>{
         socket = io(import.meta.env.VITE_BACKEND_URL)
         socket.emit('prueba', listas)
-    }, [])
+
+        socket.on('respuesta', (persona) => {
+            console.log('Desde el frontend ', persona);            
+        })
+    })
 
     const { msg } = alerta
 
