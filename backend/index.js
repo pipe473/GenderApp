@@ -38,9 +38,9 @@ app.use('/api/usuarios', usuarioRoutes );
 app.use('/api/listas', listRoutes );
 app.use('/api/regalos', regaloRoutes );
 
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+// app.get('/', (req, res) => {
+//   res.send('hello world')
+// })
 
 const PORT = process.env.PORT || 4500;
 
@@ -50,7 +50,7 @@ const servidor = app.listen(PORT, () => {
 
 // Añadiendo Socket.io
 
-import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
 
 const io = new Server(servidor, {
   pingTimeout: 60000,
@@ -63,5 +63,7 @@ io.on('connection', (socket) => {
   console.log('Conectado a socket.io');
   
   // Definiendo los eventos de socket.io
-  
+  socket.on('prueba', (listas) => {
+    console.log('Prueba desde socket io', listas);    
+  })
 })
