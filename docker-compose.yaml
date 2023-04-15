@@ -1,0 +1,41 @@
+version: "3.7"
+services:
+  mongo_gender:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=devmongo
+      - MONGO_INITDB_ROOT_PASSWORD=devpassword
+
+  back_gender:
+    container_name: back-gender
+    build: ./backend
+    image: node:16.0.0
+    working_dir: /usr/local/app
+    volumes:
+      - ./backend/:/usr/local/app
+      - /usr/local/app/node_modules/
+      - /usr/local/share/.cache/yarn/
+    command: bash -c "npm install && npm run dev"
+    depends_on:
+      - mongo_gender
+    ports:
+      - "4500:4500"
+    environment:
+      - PORT=4500
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://devmongo:devpassword@mongo_gender:27017/?authMechanism=DEFAULT
+
+  front_gender:
+    container_name: front-gender
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - back_gender
+    working_dir: /usr/src/app
+    command: bash -c "npm install && npm run dev"
+    volumes:
+      - ./frontend:/usr/src/app
