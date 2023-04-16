@@ -16,7 +16,7 @@ const Lista = () => {
 
     const params = useParams();
     // console.log(params);  
-    const { obtenerLista, lista, cargando, handleModaList, alerta } = useListas();
+    const { obtenerLista, lista, cargando, handleModaList, alerta, submitRegalosLista } = useListas();
 
     const admin = useAdmin();
     // console.log(admin);  
@@ -31,14 +31,19 @@ const Lista = () => {
     }, [])
 
     useEffect(() => {
-        socket.on('respuesta', (persona) => {
-            console.log(persona);            
+        socket.on("regalo agregado", regaloNuevo => {
+            // console.log(regaloNuevo);
+            //  submitRegalosLista(regaloNuevo)
+            
+            if (regaloNuevo.lista === lista._id) {                
+                submitRegalosLista(regaloNuevo)          
+            }
         })
     })
 
    const { nombre } = lista      
    
-   console.log(lista);
+//    console.log(lista);
    
 
    if (cargando) return 'Cargando...'

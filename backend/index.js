@@ -16,19 +16,19 @@ dotenv.config();
 dbConnect();
 
 // Configurar CORS
-const whitelist = [process.env.FRONTEND_URL];
+// const whitelist = [process.env.FRONTEND_URL];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.includes(origin)) {
-      // Puede consultar la API
-      callback(null, true);
-    } else {
-      // No esta permitido
-      callback(new Error("Error de Cors"));
-    }
-  },
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.includes(origin)) {
+//       // Puede consultar la API
+//       callback(null, true);
+//     } else {
+//       // No esta permitido
+//       callback(new Error("Error de Cors"));
+//     }
+//   },
+// };
 
 app.use(cors());
 
@@ -64,7 +64,11 @@ io.on('connection', (socket) => {
   
   // Definiendo los eventos de socket.io
   socket.on('abrir lista', (id_lista) => {
-   socket.join(id_lista);
-   
+   socket.join(id_lista);   
   });  
+
+  socket.on("nuevo regalo", (regalo) => {
+    const lista = regalo.lista;
+    socket.to(lista).emit("regalo agregado", regalo);
+  });
 });
