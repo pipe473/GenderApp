@@ -8,24 +8,42 @@ import ModalEliminarInvitado from '../components/ModalEliminarInvitado';
 import Regalo from '../components/Regalo';
 import Alerta from '../components/Alerta';
 import Invitado from '../components/Invitado';
+import io from 'socket.io-client';
+
+let socket;
 
 const Lista = () => {
 
     const params = useParams();
     // console.log(params);  
-    const { obtenerLista, lista, cargando, handleModaList, alerta } = useListas();
+    const { obtenerLista, lista, cargando, handleModaList, alerta, submitRegalosLista } = useListas();
 
     const admin = useAdmin();
-    console.log(admin);
-    
+    // console.log(admin);  
 
     useEffect(() => {
         obtenerLista(params.id)
     }, [])   
 
+    useEffect(() => {
+        socket = io(import.meta.env.VITE_BACKEND_URL)
+        socket.emit('abrir lista', params.id)
+    }, [])
+
+    useEffect(() => {
+        socket.on("regalo agregado", regaloNuevo => {
+            // console.log(regaloNuevo);
+            //  submitRegalosLista(regaloNuevo)
+            
+            if (regaloNuevo.lista === lista._id) {                
+                submitRegalosLista(regaloNuevo)          
+            }
+        })
+    })
+
    const { nombre } = lista      
    
-   console.log(lista);
+//    console.log(lista);
    
 
    if (cargando) return 'Cargando...'

@@ -1,6 +1,9 @@
 import { useState, useEffect, createContext } from 'react';
 import clienteAxios from '../config/clienteAxios';
 import { useNavigate } from 'react-router-dom';
+import io from 'socket.io-client';
+
+let socket;
 
 const ListasContext = createContext();
 
@@ -15,6 +18,7 @@ const ListasProvider = ({ children }) => {
     const [modalEliminarRegalo, setModalEliminarRegalo] = useState(false);
     const [invitado, setInvitado] = useState({});
     const [modalEliminarInvitado, setModalEliminarInvitado] = useState(false);   
+    const [buscador, setBuscador] = useState(false);   
 
     const navigate = useNavigate();
 
@@ -39,6 +43,10 @@ const ListasProvider = ({ children }) => {
             }
         }
         obtenerListas()
+    }, [])
+
+    useEffect(() => {
+        socket = io(import.meta.env.VITE_BACKEND_URL) 
     }, [])
 
     const mostrarAlerta = alerta => {
@@ -209,13 +217,15 @@ const ListasProvider = ({ children }) => {
             }
             const { data } = await clienteAxios.post('/regalos', regalo, config)
             
-            // Agrega la tarea al state
-            const listaActualizada = { ...lista }
-            listaActualizada.regalos = [...lista.regalos, data]
-
-            setLista(listaActualizada)
+             // Agrega la tarea al state
+            // const listaActualizada = { ...lista }
+            // listaActualizada.regalos = [...listaActualizada.regalos, regalo]
+            // setLista(listaActualizada)  
             setAlerta({})
             setModalFormularioLista(false)
+
+            // SOCKET IO
+            socket.emit('nuevo regalo', data)
         } catch (error) {
             console.log(error);            
         }  
@@ -430,6 +440,18 @@ const ListasProvider = ({ children }) => {
         }     
     }
 
+    const handleBuscador = () => {
+        setBuscador(!buscador)
+    }
+
+    // Socket io
+    const submitRegalosLista = (regalo) => {
+        // Agrega la tarea al state
+        const listaActualizada = { ...lista }
+        listaActualizada.regalos = [...listaActualizada.regalos, regalo]
+        setLista(listaActualizada)        
+    }
+
     return (
         <ListasContext.Provider
             value={{
@@ -455,8 +477,12 @@ const ListasProvider = ({ children }) => {
                 handleModalEliminarInvitado,
                 modalEliminarInvitado,
                 eliminarInvitado,
-                completarRegalo
+                completarRegalo,
+                buscador,
+                handleBuscador,
+                submitRegalosLista
             }}
+
         >{children}
 
         </ListasContext.Provider>

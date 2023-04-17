@@ -107,7 +107,7 @@ const FormularioLista = () => {
                         id="invitada"
                         type="text"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        placeholder="Nombre del invitad@"
+                        placeholder="Nombre de creador/@"
                         value={invitada}
                         onChange={e => setInvitada(e.target.value)}
                     />

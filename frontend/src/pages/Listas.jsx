@@ -2,14 +2,16 @@ import useListas from '../hooks/useListas';
 import PreviewLista from '../components/PreviewLista';
 import Alerta from '../components/Alerta';
 
+let socket;
+
 const Listas = () => {
 
     const { listas, alerta } = useListas();    
     // console.log(listas);    
 
+   
+
     const { msg } = alerta
-
-
 
     return ( 
             <>
