@@ -2,7 +2,7 @@ import useListas from '../hooks/useListas';
 import PreviewLista from '../components/PreviewLista';
 import Alerta from '../components/Alerta';
 
-let socket;
+// let socket;
 
 const Listas = () => {
 
