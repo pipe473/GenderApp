@@ -36,8 +36,8 @@ function App() {
               <Route path="confirmar/:id" element={<ConfirmarCuenta />} />           
             </Route>
             {/* Area Privada */}
-            <Route path="/listas" element={<Listas />} />
-            <Route path="/listas2" element={<RutaProtegida />}>  
+            <Route path="/listas" element={<RutaProtegida />}>  
+              <Route index element={<Listas />} />
               <Route path="crear-lista" element={<NuevaLista />} />
               <Route path="agregar-colaborador/:id" element={<NuevoColaborador />} />
               <Route path=":id" element={<Lista />} />
