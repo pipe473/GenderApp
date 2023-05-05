@@ -1,7 +1,4 @@
 import express from 'express';
-import { fileURLToPath } from 'url';
-import path from 'path';
-
 import dotenv from 'dotenv';
 import cors from 'cors';
 import dbConnect from './config/db.js';
@@ -12,18 +9,6 @@ import regaloRoutes from './routes/regaloRoutes.js';
 
 
 const app = express();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Serve static assets
-app.use(express.static(path.join(__dirname, 'client/build')));
-
-// Catch-all route
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
 
 app.use(express.json());
 
