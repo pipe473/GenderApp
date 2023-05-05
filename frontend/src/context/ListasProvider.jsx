@@ -40,7 +40,7 @@ const ListasProvider = ({ children }) => {
             }
         }
         obtenerListas()
-    }, [obtenerListas])
+    }, [])
 
     const mostrarAlerta = alerta => {
         setAlerta(alerta)

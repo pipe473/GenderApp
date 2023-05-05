@@ -26,7 +26,7 @@ router
     .put(checkAuth, editarLista)
     .delete( checkAuth, eliminarLista );
 
-    // router.get("/listas/:id", checkAuth, obtenerListaProductos);
+    router.get("/listas/:id", checkAuth, obtenerListas);
     router.post('/colaboradores/', checkAuth, buscarInvitado);
     router.post('/colaboradores/:id', checkAuth, agregarInvitado);
     router.post('/eliminar-colaborador/:id', checkAuth, eliminarInvitado);
