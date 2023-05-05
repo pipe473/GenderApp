@@ -134,7 +134,7 @@ const ListasProvider = ({ children }) => {
                 }
             }
             const { data } = await clienteAxios(`/listas/${id}`, config)
-            // console.log(data);   
+            console.log(data);   
             setLista(data);    
             setAlerta({})     
         } catch (error) {
