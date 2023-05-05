@@ -13,7 +13,7 @@ const PreviewLista = ({lista}) => {
                 <span className="text-sm text-teal-500 uppercase">{''} <span className="text-teal-800">-</span> {invitada}</span>
             </p>
             {auth._id !== creador && (
-                    <p className='p-1 text-xs rounded-lg text-white bg-green-500 font-bold uppercase'>Invitad@</p>
+                    <p className='p-1 text-xs rounded-lg text-white bg-green-500 font-bold uppercase'>guest</p>
                 )}
             <Link
                 to={`${_id}`}
