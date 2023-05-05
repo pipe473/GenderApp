@@ -33,7 +33,7 @@ const ListasProvider = ({ children }) => {
                 }
 
                 const { data } = await clienteAxios('/listas', config)
-                setListas([...listas, data]);              
+                setListas(data);              
 
             } catch (error) {
                 console.log(error);                
