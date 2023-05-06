@@ -37,7 +37,7 @@ function App() {
             </Route>
             {/* Area Privada */}
             <Route path="/listas" element={<RutaProtegida />}>  
-              <Route  element={<Listas />} />
+              <Route index element={<Listas />} />
               <Route path="crear-lista" element={<NuevaLista />} />
               <Route path="agregar-colaborador/:id" element={<NuevoColaborador />} />
               <Route path=":id" element={<Lista />} />
