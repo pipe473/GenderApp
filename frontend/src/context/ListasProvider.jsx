@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext } from 'react';
 import clienteAxios from '../config/clienteAxios';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const ListasContext = createContext();
 
@@ -18,6 +19,7 @@ const ListasProvider = ({ children }) => {
     const [buscador, setBuscador] = useState(false);   
 
     const navigate = useNavigate();
+    const { auth } = useAuth();
 
     useEffect(() => {
         const obtenerListas = async () => {
@@ -40,7 +42,7 @@ const ListasProvider = ({ children }) => {
             }
         }
         obtenerListas()
-    }, [])
+    }, [auth])
 
     const mostrarAlerta = alerta => {
         setAlerta(alerta)
@@ -134,7 +136,7 @@ const ListasProvider = ({ children }) => {
                 }
             }
             const { data } = await clienteAxios(`/listas/${id}`, config)
-            console.log(data);   
+            // console.log(data);   
             setLista(data);    
             setAlerta({})     
         } catch (error) {
